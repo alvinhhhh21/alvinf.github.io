@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@AlvinF | Premium Link Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --bg-gradient: radial-gradient(circle at top, #1f2833 0%, #0b0c10 80%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #f5f6fa;
+            --text-secondary: #95a5a6;
+            
+            --color-tpb: #e67e22;
+            --color-kp: #3498db;
+            --color-ai: #9b59b6;
+            --color-kesehatan: #1abc9c;
+            --color-soshum: #e74c3c;
+            --color-saintek: #2ecc71;
+            --color-tes: #f1c40f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-dark);
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 440px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1f4068, #162447);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .username {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            color: #fff;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(220, 39, 67, 0.2);
+        }
+
+        /* Featured Button */
+        .btn-featured {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: #fff;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+            animation: pulse 2s infinite alternate;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.2s;
+        }
+
+        .btn-featured:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 12px rgba(52, 152, 219, 0.3); }
+            100% { box-shadow: 0 0 22px rgba(52, 152, 219, 0.6); }
+        }
+
+        /* Collapsible Panels */
+        .panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s;
+        }
+
+        .panel-trigger {
+            width: 100%;
+            padding: 18px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .trigger-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .trigger-title i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .chevron {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .panel-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Active State */
+        .panel.active {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .panel.active .chevron {
+            transform: rotate(180deg);
+        }
+        .panel.active .panel-content {
+            max-height: 2000px;
+        }
+
+        /* List Items */
+        .link-list {
+            list-style: none;
+            padding: 8px 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .link-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 0.95rem;
+        }
+
+        .link-item a:active {
+            background: var(--glass-hover);
+            border-color: rgba(255,255,255,0.05);
+        }
+
+        .link-item a i {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Grid System */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 14px;
+        }
+
+        .grid-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .grid-card:active {
+            background: var(--glass-hover);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .grid-card i {
+            font-size: 1.3rem;
+            color: #60a5fa;
+        }
+
+        /* Footer & Socials */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .social-links a:active {
+            color: #3498db;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <div class="profile">
+            <div class="avatar">A</div>
+            <h1 class="username">@AlvinF</h1>
+            <a href="https://instagram.com/alvinf.__" class="badge" target="_blank">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+        </div>
+
+        <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured" target="_blank">
+            <i class="fa-solid fa-briefcase"></i> LIST TEMPAT MAGANG TEKNIK
+        </a>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-university" style="color: var(--color-tpb);"></i>
+                    <span>TPB</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <ul class="link-list">
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank"><i class="fa-solid fa-school"></i> TPB ITB</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> TPB ITERA</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-robot" style="color: var(--color-ai);"></i>
+                    <span>AI</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <ul class="link-list">
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank"><i class="fa-solid fa-terminal"></i> Kumpulan Prompt AI</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku Buku AI</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-heart-pulse" style="color: var(--color-kesehatan);"></i>
+                    <span>KESEHATAN</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <ul class="link-list">
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-pills"></i> Farmasi, Keperawatan, Buku Kesehatan</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank"><i class="fa-solid fa-stethoscope"></i> FK, FKG</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-scale-balanced" style="color: var(--color-soshum);"></i>
+                    <span>SOSHUM</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <ul class="link-list">
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank"><i class="fa-solid fa-brain"></i> Psikologi</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-chart-line"></i> FEB</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-gavel"></i> FH</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-users"></i> Ilmu Sosial & Komunikasi</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-flask" style="color: var(--color-saintek);"></i>
+                    <span>SAINTEK</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <div class="grid-container">
+                    <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank"><i class="fa-solid fa-laptop-code"></i><span>Buku Informatika</span></a>
+                    <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
+                    <a href="https://drive.google.com/file/d/1rZAQELOqRax7oYUE8FsPbNOwNXKnSolV/view?usp=drive_link" class="grid-card" target="_blank"><i class="fa-solid fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
+                    <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
+                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-satellite"></i><span>Geofisika</span></a>
+                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
+                    <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
+                    <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-oil-well"></i><span>Teknik Perminyakan</span></a>
+                    <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gears"></i><span>Mesin, Perkapalan</span></a>
+                    <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-atom"></i><span>Metalurgi, Material</span></a>
+                    <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fa-solid fa-layer-group"></i><span>Metalurgi 2</span></a>
+                    <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
+                    <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-water"></i><span>Oseanografi</span></a>
+                    <a href="https://drive.google.com/file/d/10Ekh41ohYpObe2DunZ5c9kIlcUVeUf_W/view?sharing" class="grid-card" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
+                    <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
+                    <a href="https://drive.google.com/drive/folders/0B-m74gUnF8qxZUhid2NzNlN5dTQ?resourcekey=0-h6P72yvLSAkMF5hH0sPwNA" class="grid-card" target="_blank"><i class="fa-solid fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
+                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
+                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per Univ</span></a>
+                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
+                    <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-anchor"></i><span>Teknik Kelautan</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <button class="panel-trigger">
+                <div class="trigger-title">
+                    <i class="fa-solid fa-pen-to-square" style="color: var(--color-tes);"></i>
+                    <span>TES</span>
+                </div>
+                <i class="fa-solid fa-chevron-down chevron"></i>
+            </button>
+            <div class="panel-content">
+                <ul class="link-list">
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank"><i class="fa-solid fa-file-signature"></i> SKD STAN</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank"><i class="fa-solid fa-file-lines"></i> Soal Mandiri (@NASA473)</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank"><i class="fa-solid fa-trophy"></i> OSN</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank"><i class="fa-brands fa-google-drive"></i> UTBK - Google Drive</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank"><i class="fa-solid fa-check-to-slot"></i> SKD</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank"><i class="fa-solid fa-file-word"></i> SAT - Google Docs</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFLLLLL</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank"><i class="fa-solid fa-lightbulb"></i> PKM - Google Docs</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://instagram.com/alvinf.__" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 @AlvinF. Powered by GitHub Pages.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.panel-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const currentPanel = trigger.parentElement;
+                
+                document.querySelectorAll('.panel').forEach(panel => {
+                    if (panel !== currentPanel) {
+                        panel.classList.remove('active');
+                    }
+                });
+                
+                currentPanel.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
