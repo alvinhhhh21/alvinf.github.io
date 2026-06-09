@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@AlvinF | Premium Link Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --bg-dark: #0b0c10;
             --bg-gradient: radial-gradient(circle at top, #1f2833 0%, #0b0c10 80%);
-            --glass-bg: rgba(255, 255, 255, 0.035);
-            --glass-border: rgba(255, 255, 255, 0.09);
-            --glass-hover: rgba(255, 255, 255, 0.09);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.08);
             
             --text-primary: #f5f6fa;
-            --text-secondary: #8a9aa3;
+            --text-secondary: #95a5a6;
             
             --color-tpb: #e67e22;
             --color-kp: #3498db;
@@ -42,7 +42,7 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 20px 16px 40px;
+            padding: 24px 16px;
         }
 
         .wrapper {
@@ -50,784 +50,62 @@
             max-width: 440px;
             display: flex;
             flex-direction: column;
-            gap: 18px;
-        }
-
-        /* Sticky Header + Search */
-        .top-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(11, 12, 16, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 12px 0 14px;
-            margin: -20px -16px 4px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            padding: 12px 18px;
-            margin: 0 16px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .search-container:focus-within {
-            border-color: rgba(52, 152, 219, 0.4);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-
-        .search-container i {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-        }
-
-        .search-container input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-weight: 500;
-            outline: none;
-        }
-
-        .search-container input::placeholder {
-            color: var(--text-secondary);
-            font-weight: 400;
+            gap: 16px;
         }
 
         /* Profile Section */
         .profile {
             text-align: center;
-            padding-top: 8px;
+            margin-bottom: 12px;
         }
 
         .avatar {
-            width: 90px;
-            height: 90px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
             background: linear-gradient(135deg, #1f4068, #162447);
-            margin: 0 auto 14px;
+            margin: 0 auto 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             color: #fff;
-            border: 3px solid var(--glass-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
         .username {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 2px;
-            letter-spacing: -0.3px;
-        }
-
-        .tagline {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-            font-weight: 500;
+            margin-bottom: 4px;
         }
 
         .badge {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: #fff;
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            padding: 7px 18px;
-            border-radius: 22px;
+            padding: 6px 16px;
+            border-radius: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
-            transition: transform 0.2s;
-        }
-
-        .badge:active {
-            transform: scale(0.96);
+            box-shadow: 0 4px 12px rgba(220, 39, 67, 0.2);
         }
 
         /* Featured Button */
         .btn-featured {
             background: linear-gradient(135deg, #2980b9, #3498db);
             color: #fff;
-            padding: 17px 20px;
-            border-radius: 16px;
-            text-align: center;
-            font-weight: 700;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 0 20px rgba(52, 152, 219, 0.45);
-            animation: pulse 2.2s infinite alternate ease-in-out;
-            border: 1px solid rgba(255,255,255,0.15);
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 0.98rem;
-        }
-
-        .btn-featured:active {
-            transform: scale(0.985);
-            box-shadow: 0 0 12px rgba(52, 152, 219, 0.3);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 14px rgba(52, 152, 219, 0.35); }
-            100% { box-shadow: 0 0 26px rgba(52, 152, 219, 0.65); }
-        }
-
-        /* Collapsible Panels */
-        .panel {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            overflow: hidden;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .panel.active {
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        .panel-trigger {
-            width: 100%;
-            padding: 18px 22px;
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.02rem;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .panel-trigger:active {
-            background: rgba(255,255,255,0.03);
-        }
-
-        .trigger-title {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
-
-        .trigger-title i {
-            font-size: 1.15rem;
-            width: 22px;
-            text-align: center;
-        }
-
-        .chevron {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .panel.active .chevron {
-            transform: rotate(180deg);
-        }
-
-        .count-badge {
-            font-size: 0.72rem;
-            background: rgba(255,255,255,0.09);
-            color: var(--text-secondary);
-            padding: 3px 9px;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-
-        .panel-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(0, 0, 0, 0.12);
-        }
-
-        .panel.active .panel-content {
-            max-height: 2800px;
-        }
-
-        /* List Items - More Attractive */
-        .link-list {
-            list-style: none;
-            padding: 6px 14px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .link-item a {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 15px 18px;
-            color: var(--text-primary);
-            text-decoration: none;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .link-item a:active {
-            background: var(--glass-hover);
-            border-color: rgba(52, 152, 219, 0.3);
-            transform: translateY(1px);
-        }
-
-        .link-item a i:first-child {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            background: rgba(255,255,255,0.07);
-            width: 34px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9px;
-            flex-shrink: 0;
-        }
-
-        .link-text {
-            flex: 1;
-            line-height: 1.3;
-        }
-
-        .external-icon {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            opacity: 0.6;
-            transition: all 0.2s;
-        }
-
-        .link-item a:active .external-icon {
-            opacity: 1;
-            transform: translateX(3px);
-            color: #3498db;
-        }
-
-        /* Grid System - Much More Attractive */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            padding: 16px 14px 20px;
-        }
-
-        .grid-card {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 16px;
             border-radius: 14px;
-            padding: 18px 12px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            gap: 10px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.82rem;
             font-weight: 600;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            min-height: 108px;
-        }
-
-        .grid-card:active {
-            transform: scale(0.96);
-            border-color: rgba(52, 152, 219, 0.35);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-        }
-
-        .grid-card i {
-            font-size: 1.55rem;
-            color: #5da3f0;
-            background: rgba(93, 163, 240, 0.12);
-            width: 52px;
-            height: 52px;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 13px;
-            transition: transform 0.2s;
-        }
-
-        .grid-card:active i {
-            transform: scale(0.9);
-        }
-
-        /* Footer & Socials */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 12px;
-        }
-
-        .social-links a {
-            color: var(--text-primary);
-            font-size: 1.6rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            opacity: 0.85;
-        }
-
-        .social-links a:active {
-            color: #3498db;
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 0.73rem;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            letter-spacing: 0.4px;
-            padding-bottom: 10px;
-            opacity: 0.85;
-        }
-
-        .footer a {
-            color: inherit;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="wrapper">
-        
-        <!-- Sticky Search Navigation -->
-        <div class="top-nav">
-            <div class="search-container">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="search-input" placeholder="Cari link, kategori, atau topik... (contoh: geologi, prompt, psikologi)">
-            </div>
-        </div>
-
-        <!-- Profile -->
-        <div class="profile">
-            <div class="avatar">A</div>
-            <h1 class="username">@AlvinF</h1>
-            <p class="tagline">Premium Link Hub • Mahasiswa Teknik, Sains &amp; Kesehatan</p>
-            
-            <a href="https://instagram.com/alvinf.__" class="badge" target="_blank">
-                <i class="fa-brands fa-instagram"></i> 
-                <span>Instagram</span>
-            </a>
-        </div>
-
-        <!-- Featured CTA -->
-        <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured" target="_blank">
-            <i class="fa-solid fa-briefcase"></i> 
-            <span>LIST TEMPAT MAGANG TEKNIK</span>
-        </a>
-
-        <!-- TPB -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-university" style="color: var(--color-tpb);"></i>
-                    <span>TPB</span>
-                    <span class="count-badge">2</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank">
-                            <i class="fa-solid fa-school"></i>
-                            <span class="link-text">TPB ITB</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank">
-                            <i class="fa-solid fa-building-columns"></i>
-                            <span class="link-text">TPB ITERA</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- AI -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-robot" style="color: var(--color-ai);"></i>
-                    <span>AI</span>
-                    <span class="count-badge">2</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank">
-                            <i class="fa-solid fa-terminal"></i>
-                            <span class="link-text">Kumpulan Prompt AI</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank">
-                            <i class="fa-solid fa-book"></i>
-                            <span class="link-text">Buku Buku AI</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- KESEHATAN -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-heart-pulse" style="color: var(--color-kesehatan);"></i>
-                    <span>KESEHATAN</span>
-                    <span class="count-badge">2</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank">
-                            <i class="fa-solid fa-pills"></i>
-                            <span class="link-text">Farmasi, Keperawatan, Buku Kesehatan</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank">
-                            <i class="fa-solid fa-stethoscope"></i>
-                            <span class="link-text">FK, FKG</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- SOSHUM -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-scale-balanced" style="color: var(--color-soshum);"></i>
-                    <span>SOSHUM</span>
-                    <span class="count-badge">4</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-brain"></i>
-                            <span class="link-text">Psikologi</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span class="link-text">FEB</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-gavel"></i>
-                            <span class="link-text">FH</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-users"></i>
-                            <span class="link-text">Ilmu Sosial &amp; Komunikasi</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- SAINTEK (Grid) -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-flask" style="color: var(--color-saintek);"></i>
-                    <span>SAINTEK</span>
-                    <span class="count-badge">20</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <div class="grid-container">
-                    <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        <span>Buku Informatika</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-microchip"></i>
-                        <span>Elektro, Info, Data Science</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rZAQELOqRax7oYUE8FsPbNOwNXKnSolV/view?usp=drive_link" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span>Kebumian, Geologi, Geofisika</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                        <span>Geodesi / Geomatika</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-satellite"></i>
-                        <span>Geofisika</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-gem"></i>
-                        <span>Geologi</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-mountain"></i>
-                        <span>Tambang, Geografi, GIS</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-oil-well"></i>
-                        <span>Teknik Perminyakan</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-gears"></i>
-                        <span>Mesin, Perkapalan</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-atom"></i>
-                        <span>Metalurgi, Material</span>
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span>Metalurgi 2</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-dna"></i>
-                        <span>MIPA, Biologi, Stat, Astro</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-water"></i>
-                        <span>Oseanografi</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10Ekh41ohYpObe2DunZ5c9kIlcUVeUf_W/view?sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-city"></i>
-                        <span>PWK, Sipil &amp; Lingkungan</span>
-                    </a>
-                    <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-industry"></i>
-                        <span>Teknik Industri &amp; Pertanian</span>
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/0B-m74gUnF8qxZUhid2NzNlN5dTQ?resourcekey=0-h6P72yvLSAkMF5hH0sPwNA" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-vial"></i>
-                        <span>Materi Tekkim Lengkap</span>
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-file-contract"></i>
-                        <span>Laporan KP Tekkim</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-building"></i>
-                        <span>Tekkim Per Univ</span>
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <span>Tugas Akhir Tekkim</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank">
-                        <i class="fa-solid fa-anchor"></i>
-                        <span>Teknik Kelautan</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- TES -->
-        <div class="panel">
-            <button class="panel-trigger">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-pen-to-square" style="color: var(--color-tes);"></i>
-                    <span>TES</span>
-                    <span class="count-badge">8</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank">
-                            <i class="fa-solid fa-file-signature"></i>
-                            <span class="link-text">SKD STAN</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank">
-                            <i class="fa-solid fa-file-lines"></i>
-                            <span class="link-text">Soal Mandiri (@NASA473)</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-trophy"></i>
-                            <span class="link-text">OSN</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank">
-                            <i class="fa-brands fa-google-drive"></i>
-                            <span class="link-text">UTBK - Google Drive</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank">
-                            <i class="fa-solid fa-check-to-slot"></i>
-                            <span class="link-text">SKD</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank">
-                            <i class="fa-solid fa-file-word"></i>
-                            <span class="link-text">SAT - Google Docs</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-language"></i>
-                            <span class="link-text">TOEFL</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                    <li class="link-item">
-                        <a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank">
-                            <i class="fa-solid fa-lightbulb"></i>
-                            <span class="link-text">PKM - Google Docs</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Social & Footer -->
-        <div class="social-links">
-            <a href="https://instagram.com/alvinf.__" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2026 @AlvinF • Premium Link Hub untuk Mahasiswa Indonesia</p>
-        </div>
-
-    </div>
-
-    <script>
-        // Accordion - Allow multiple panels open (better navigation UX)
-        document.querySelectorAll('.panel-trigger').forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const panel = trigger.parentElement;
-                panel.classList.toggle('active');
-            });
-        });
-
-        // Powerful Real-time Search (filters links + auto-opens relevant panels)
-        const searchInput = document.getElementById('search-input');
-        
-        searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase().trim();
-            const panels = document.querySelectorAll('.panel');
-            
-            panels.forEach(panel => {
-                const listItems = panel.querySelectorAll('.link-item');
-                const gridCards = panel.querySelectorAll('.grid-card');
-                let hasMatch = false;
-
-                // Filter list items
-                listItems.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    if (term === '' || text.includes(term)) {
-                        item.style.display = '';
-                        if (term !== '') hasMatch = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                // Filter grid cards
-                gridCards.forEach(card => {
-                    const text = card.textContent.toLowerCase();
-                    if (term === '' || text.includes(term)) {
-                        card.style.display = '';
-                        if (term !== '') hasMatch = true;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                // Auto-expand panels that have matches when searching
-                if (term !== '') {
-                    if (hasMatch) {
-                        panel.classList.add('active');
-                    } else {
-                        panel.classList.remove('active');
-                    }
-                }
-            });
-        });
-
-        // Bonus: Clear search on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && searchInput.value !== '') {
-                searchInput.value = '';
-                // Reset all items visibility
-                document.querySelectorAll('.link-item, .grid-card').forEach(el => {
-                    el.style.display = '';
-                });
-            }
-        });
-
-        // Optional: Show a subtle toast when search is active (can be removed)
-        // For now, the auto-open behavior is sufficient for great UX
-    </script>
-</body>
-</html>            align-items: center;
             justify-content: center;
             gap: 10px;
             box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
@@ -1099,7 +377,7 @@
                     <a href="https://drive.google.com/file/d/1rZAQELOqRax7oYUE8FsPbNOwNXKnSolV/view?usp=drive_link" class="grid-card" target="_blank"><i class="fa-solid fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
                     <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
                     <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-satellite"></i><span>Geofisika</span></a>
-                    <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
+                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
                     <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
                     <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-oil-well"></i><span>Teknik Perminyakan</span></a>
                     <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gears"></i><span>Mesin, Perkapalan</span></a>
