@@ -15,13 +15,11 @@
             
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.12);
             --glass-hover: rgba(255, 255, 255, 0.08);
             
             --text-main: #ffffff;
             --text-muted: #9ca3af;
             
-            /* Category Colors */
             --c-tpb: #f97316;
             --c-kp: #3b82f6;
             --c-ai: #a855f7;
@@ -51,7 +49,6 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* Ambient Background Glows */
         .bg-blob {
             position: fixed;
             border-radius: 50%;
@@ -74,10 +71,28 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            /* Extra bottom padding to prevent content from hiding behind the bottom nav */
             padding: 24px 16px 100px; 
             position: relative;
             z-index: 1;
+        }
+
+        /* --- Digital Clock --- */
+        .digital-clock {
+            position: absolute;
+            top: 20px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 10;
         }
 
         /* --- Profile Section --- */
@@ -126,7 +141,7 @@
         }
         .badge:active { transform: scale(0.96); }
 
-        /* --- Sticky Search Bar --- */
+        /* --- Sticky Search Bar & Filters --- */
         .top-nav {
             position: sticky;
             top: 12px;
@@ -134,7 +149,7 @@
             background: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 8px;
+            padding: 12px;
             border-radius: 16px;
             border: 1px solid var(--glass-border);
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
@@ -173,7 +188,34 @@
             box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
         }
 
-        /* --- Empty State for Search --- */
+        .filter-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding-top: 12px;
+            scrollbar-width: none;
+        }
+        .filter-scroll::-webkit-scrollbar { display: none; }
+
+        .filter-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-chip.active {
+            background: var(--accent-primary);
+            color: #fff;
+            border-color: var(--accent-primary);
+        }
+
+        /* --- Empty State --- */
         .empty-state {
             display: none;
             text-align: center;
@@ -190,9 +232,7 @@
             color: var(--text-main);
             margin-bottom: 4px;
         }
-        .empty-state p {
-            font-size: 0.85rem;
-        }
+        .empty-state p { font-size: 0.85rem; }
 
         /* --- Featured Button --- */
         .btn-featured {
@@ -264,7 +304,6 @@
             background: rgba(0, 0, 0, 0.2);
         }
 
-        /* Active Panel State */
         .panel.active { border-color: rgba(255, 255, 255, 0.15); }
         .panel.active .chevron { transform: rotate(180deg); }
         .panel.active .panel-content { max-height: 2000px; }
@@ -323,7 +362,6 @@
         .grid-card:active { background: var(--glass-hover); border-color: rgba(255, 255, 255, 0.08); }
         .grid-card i { font-size: 1.2rem; color: #60a5fa; }
 
-        /* --- Footer --- */
         .footer {
             text-align: center;
             font-size: 0.75rem;
@@ -332,7 +370,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- Mobile Bottom App Bar --- */
+        /* --- Mobile Bottom Nav --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -378,6 +416,8 @@
 
     <div class="wrapper">
         
+        <div class="digital-clock" id="clock">00:00</div>
+
         <div class="profile" id="top">
             <div class="avatar">A</div>
             <h1 class="username">@AlvinF</h1>
@@ -389,7 +429,16 @@
         <div class="top-nav">
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="Cari materi kuliah atau jurusan...">
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari materi atau jurusan...">
+            </div>
+            
+            <div class="filter-scroll">
+                <button class="filter-chip active" data-filter="">Semua</button>
+                <button class="filter-chip" data-filter="metalurgi">Metalurgi</button>
+                <button class="filter-chip" data-filter="tekkim">Tekkim</button>
+                <button class="filter-chip" data-filter="informatika">Informatika</button>
+                <button class="filter-chip" data-filter="kedokteran">Kedokteran</button>
+                <button class="filter-chip" data-filter="hukum">Hukum</button>
             </div>
         </div>
 
@@ -399,11 +448,11 @@
             <p>Coba gunakan kata kunci yang berbeda.</p>
         </div>
 
-        <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured searchable-item" data-title="list tempat magang teknik kerja praktek kp" target="_blank">
+        <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured search-item" target="_blank">
             <i class="fa-solid fa-briefcase"></i> LIST TEMPAT MAGANG TEKNIK
         </a>
 
-        <div class="panel searchable-item" data-title="tpb itb itera">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-university" style="color: var(--c-tpb);"></i>
@@ -413,13 +462,13 @@
             </button>
             <div class="panel-content">
                 <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank"><i class="fa-solid fa-school"></i> TPB ITB</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> TPB ITERA</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank"><i class="fa-solid fa-school"></i> TPB ITB</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> TPB ITERA</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="panel searchable-item" data-title="ai artificial intelligence prompt buku">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-robot" style="color: var(--c-ai);"></i>
@@ -429,13 +478,13 @@
             </button>
             <div class="panel-content">
                 <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank"><i class="fa-solid fa-terminal"></i> Kumpulan Prompt AI</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku Buku AI</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank"><i class="fa-solid fa-terminal"></i> Kumpulan Prompt AI</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku Buku AI</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="panel searchable-item" data-title="kesehatan farmasi keperawatan fk fkg kedokteran gigi">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-heart-pulse" style="color: var(--c-health);"></i>
@@ -445,13 +494,13 @@
             </button>
             <div class="panel-content">
                 <ul class="link-list">
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-pills"></i> Farmasi, Keperawatan, Buku Kesehatan</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank"><i class="fa-solid fa-stethoscope"></i> FK, FKG</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-pills"></i> Farmasi, Keperawatan, Buku Kesehatan</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank"><i class="fa-solid fa-stethoscope"></i> FK, FKG, Kedokteran</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="panel searchable-item" data-title="soshum psikologi feb ekonomi bisnis fh hukum sosial komunikasi">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-scale-balanced" style="color: var(--c-soshum);"></i>
@@ -461,15 +510,15 @@
             </button>
             <div class="panel-content">
                 <ul class="link-list">
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank"><i class="fa-solid fa-brain"></i> Psikologi</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-chart-line"></i> FEB</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-gavel"></i> FH</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-users"></i> Ilmu Sosial & Komunikasi</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank"><i class="fa-solid fa-brain"></i> Psikologi</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-chart-line"></i> FEB</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-gavel"></i> FH Hukum</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-users"></i> Ilmu Sosial & Komunikasi</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="panel searchable-item" data-title="saintek informatika elektro data science kebumian geologi geofisika geodesi geomatika tambang perminyakan mesin perkapalan metalurgi material mipa biologi statistika astronomi oseanografi pwk sipil lingkungan industri pertanian tekkim teknik kimia kelautan">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-flask" style="color: var(--c-saintek);"></i>
@@ -479,31 +528,31 @@
             </button>
             <div class="panel-content">
                 <div class="grid-container">
-                    <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank"><i class="fa-solid fa-laptop-code"></i><span>Buku Informatika</span></a>
-                    <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
-                    <a href="https://drive.google.com/file/d/1rZAQELOqRax7oYUE8FsPbNOwNXKnSolV/view?usp=drive_link" class="grid-card" target="_blank"><i class="fa-solid fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
-                    <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
-                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-satellite"></i><span>Geofisika</span></a>
-                    <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
-                    <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
-                    <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-oil-well"></i><span>Teknik Perminyakan</span></a>
-                    <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gears"></i><span>Mesin, Perkapalan</span></a>
-                    <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-atom"></i><span>Metalurgi, Material</span></a>
-                    <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fa-solid fa-layer-group"></i><span>Metalurgi 2</span></a>
-                    <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
-                    <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-water"></i><span>Oseanografi</span></a>
-                    <a href="https://drive.google.com/file/d/10Ekh41ohYpObe2DunZ5c9kIlcUVeUf_W/view?sharing" class="grid-card" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
-                    <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
-                    <a href="https://drive.google.com/drive/folders/0B-m74gUnF8qxZUhid2NzNlN5dTQ?resourcekey=0-h6P72yvLSAkMF5hH0sPwNA" class="grid-card" target="_blank"><i class="fa-solid fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
-                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
-                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per Univ</span></a>
-                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
-                    <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-anchor"></i><span>Teknik Kelautan</span></a>
+                    <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card search-item" target="_blank"><i class="fa-solid fa-laptop-code"></i><span>Buku Informatika</span></a>
+                    <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
+                    <a href="https://drive.google.com/file/d/1rZAQELOqRax7oYUE8FsPbNOwNXKnSolV/view?usp=drive_link" class="grid-card search-item" target="_blank"><i class="fa-solid fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
+                    <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
+                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-satellite"></i><span>Geofisika</span></a>
+                    <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
+                    <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
+                    <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-oil-well"></i><span>Teknik Perminyakan</span></a>
+                    <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-gears"></i><span>Mesin, Perkapalan</span></a>
+                    <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-atom"></i><span>Metalurgi, Material</span></a>
+                    <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card search-item" target="_blank"><i class="fa-solid fa-layer-group"></i><span>Metalurgi 2</span></a>
+                    <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
+                    <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-water"></i><span>Oseanografi</span></a>
+                    <a href="https://drive.google.com/file/d/10Ekh41ohYpObe2DunZ5c9kIlcUVeUf_W/view?sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
+                    <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
+                    <a href="https://drive.google.com/drive/folders/0B-m74gUnF8qxZUhid2NzNlN5dTQ?resourcekey=0-h6P72yvLSAkMF5hH0sPwNA" class="grid-card search-item" target="_blank"><i class="fa-solid fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
+                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card search-item" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
+                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card search-item" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per Univ</span></a>
+                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card search-item" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
+                    <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card search-item" target="_blank"><i class="fa-solid fa-anchor"></i><span>Teknik Kelautan</span></a>
                 </div>
             </div>
         </div>
 
-        <div class="panel searchable-item" data-title="tes skd stan mandiri nasa473 osn utbk sat toefl pkm">
+        <div class="panel">
             <button class="panel-trigger">
                 <div class="trigger-title">
                     <i class="fa-solid fa-pen-to-square" style="color: var(--color-tes);"></i>
@@ -513,14 +562,14 @@
             </button>
             <div class="panel-content">
                 <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank"><i class="fa-solid fa-file-signature"></i> SKD STAN</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank"><i class="fa-solid fa-file-lines"></i> Soal Mandiri (@NASA473)</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank"><i class="fa-solid fa-trophy"></i> OSN</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank"><i class="fa-brands fa-google-drive"></i> UTBK - Google Drive</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank"><i class="fa-solid fa-check-to-slot"></i> SKD</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank"><i class="fa-solid fa-file-word"></i> SAT - Google Docs</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFLLLLL</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank"><i class="fa-solid fa-lightbulb"></i> PKM - Google Docs</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank"><i class="fa-solid fa-file-signature"></i> SKD STAN</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank"><i class="fa-solid fa-file-lines"></i> Soal Mandiri (@NASA473)</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank"><i class="fa-solid fa-trophy"></i> OSN</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank"><i class="fa-brands fa-google-drive"></i> UTBK</a></li>
+                    <li class="link-item search-item"><a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank"><i class="fa-solid fa-check-to-slot"></i> SKD</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank"><i class="fa-solid fa-file-word"></i> SAT</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFL</a></li>
+                    <li class="link-item search-item"><a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank"><i class="fa-solid fa-lightbulb"></i> PKM</a></li>
                 </ul>
             </div>
         </div>
@@ -547,7 +596,16 @@
     </nav>
 
     <script>
-        // Akordion Interaksi
+        // --- Live Digital Clock ---
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('clock').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- Panel Accordion ---
         document.querySelectorAll('.panel-trigger').forEach(trigger => {
             trigger.addEventListener('click', () => {
                 const currentPanel = trigger.parentElement;
@@ -558,49 +616,87 @@
             });
         });
 
-        // Live Search Logic + Empty State
+        // --- Deep Search & Filter Logic ---
         const searchInput = document.getElementById('searchInput');
-        const searchableItems = document.querySelectorAll('.searchable-item');
+        const filterChips = document.querySelectorAll('.filter-chip');
+        const panels = document.querySelectorAll('.panel');
+        const standaloneItems = document.querySelectorAll('.search-item:not(.panel .search-item)');
         const emptyState = document.getElementById('emptyState');
 
-        searchInput.addEventListener('input', (e) => {
-            const filterText = e.target.value.toLowerCase().trim();
-            let matchCount = 0;
-            
-            searchableItems.forEach(item => {
-                const searchKeywords = item.getAttribute('data-title').toLowerCase();
-                
-                if (filterText === '') {
-                    item.style.display = 'block';
-                    item.classList.remove('active');
-                    matchCount++;
-                } else if (searchKeywords.includes(filterText)) {
-                    item.style.display = 'block';
-                    if(item.classList.contains('panel')) item.classList.add('active');
-                    matchCount++;
+        function performSearch(filterText) {
+            let totalMatches = 0;
+
+            // Sortir item di luar panel (seperti tombol magang)
+            standaloneItems.forEach(item => {
+                if (filterText === '' || item.innerText.toLowerCase().includes(filterText)) {
+                    item.style.display = '';
+                    totalMatches++;
                 } else {
                     item.style.display = 'none';
                 }
             });
 
-            // Munculkan Empty State jika tidak ada yang cocok
-            emptyState.style.display = matchCount === 0 ? 'block' : 'none';
+            // Sortir item di dalam setiap panel
+            panels.forEach(panel => {
+                let panelHasMatch = false;
+                const items = panel.querySelectorAll('.search-item');
+                
+                items.forEach(item => {
+                    if (filterText === '' || item.innerText.toLowerCase().includes(filterText)) {
+                        item.style.display = ''; 
+                        panelHasMatch = true;
+                        totalMatches++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (panelHasMatch) {
+                    panel.style.display = 'block';
+                    if (filterText !== '') panel.classList.add('active'); 
+                    else panel.classList.remove('active');
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+
+            emptyState.style.display = totalMatches === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            // Reset chip active state saat mengetik manual
+            filterChips.forEach(c => c.classList.remove('active'));
+            filterChips[0].classList.add('active'); // Set default ke 'Semua'
+            if (val !== '') filterChips[0].classList.remove('active');
+            
+            performSearch(val);
         });
 
-        // Web Share API terintegrasi
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                
+                const filterVal = chip.getAttribute('data-filter');
+                searchInput.value = filterVal;
+                performSearch(filterVal);
+            });
+        });
+
+        // --- Web Share API ---
         document.getElementById('shareBtn').addEventListener('click', async () => {
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: '@AlvinF Premium Link Hub',
-                        text: 'Temukan materi kuliah, tryout, dan info magang teknik terlengkap di sini!',
+                        text: 'Temukan materi kuliah dan info magang teknik terlengkap di sini!',
                         url: window.location.href
                     });
                 } catch (err) {
                     console.log('User membatalkan share atau error:', err);
                 }
             } else {
-                // Fallback jika browser lama
                 alert('Salin tautan ini untuk membagikan: ' + window.location.href);
             }
         });
