@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>@AlvinF | Premium Link Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>@AlvinF</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -48,6 +48,7 @@
             overflow-y: auto;
             overflow-x: hidden;
             position: relative;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* Ambient Background Glows */
@@ -73,7 +74,8 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            padding: 24px 16px 60px;
+            /* Extra bottom padding to prevent content from hiding behind the bottom nav */
+            padding: 24px 16px 100px; 
             position: relative;
             z-index: 1;
         }
@@ -129,7 +131,7 @@
             position: sticky;
             top: 12px;
             z-index: 100;
-            background: rgba(5, 5, 5, 0.75);
+            background: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 8px;
@@ -148,7 +150,7 @@
             position: absolute;
             left: 14px;
             top: 50%;
-            transform: translateY(--50%);
+            transform: translateY(-50%);
             color: var(--text-muted);
             font-size: 0.95rem;
         }
@@ -166,9 +168,30 @@
             transition: all 0.3s;
         }
         .search-input:focus {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             border-color: var(--accent-primary);
             box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+        }
+
+        /* --- Empty State for Search --- */
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+        .empty-state i {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.2);
+        }
+        .empty-state h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .empty-state p {
+            font-size: 0.85rem;
         }
 
         /* --- Featured Button --- */
@@ -308,6 +331,44 @@
             margin-top: 16px;
             letter-spacing: 0.5px;
         }
+
+        /* --- Mobile Bottom App Bar --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 450px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 20px;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            border-top: 1px solid var(--glass-border);
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-btn i { font-size: 1.2rem; }
+        .nav-btn.active { color: var(--text-main); }
+        .nav-btn:active { transform: scale(0.9); }
     </style>
 </head>
 <body>
@@ -317,7 +378,7 @@
 
     <div class="wrapper">
         
-        <div class="profile">
+        <div class="profile" id="top">
             <div class="avatar">A</div>
             <h1 class="username">@AlvinF</h1>
             <a href="https://instagram.com/alvinf.__" class="badge" target="_blank">
@@ -330,6 +391,12 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" class="search-input" id="searchInput" placeholder="Cari materi kuliah atau jurusan...">
             </div>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+            <i class="fa-solid fa-folder-open"></i>
+            <h3>Tidak Ditemukan</h3>
+            <p>Coba gunakan kata kunci yang berbeda.</p>
         </div>
 
         <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured searchable-item" data-title="list tempat magang teknik kerja praktek kp" target="_blank">
@@ -464,46 +531,78 @@
 
     </div>
 
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-btn" onclick="document.getElementById('searchInput').focus();">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Cari</span>
+        </button>
+        <button class="nav-btn" id="shareBtn">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Bagikan</span>
+        </button>
+    </nav>
+
     <script>
-        // Fungsionalitas Akordion Panel Menutup dan Membuka
+        // Akordion Interaksi
         document.querySelectorAll('.panel-trigger').forEach(trigger => {
             trigger.addEventListener('click', () => {
                 const currentPanel = trigger.parentElement;
-                
                 document.querySelectorAll('.panel').forEach(panel => {
-                    if (panel !== currentPanel) {
-                        panel.classList.remove('active');
-                    }
+                    if (panel !== currentPanel) panel.classList.remove('active');
                 });
-                
                 currentPanel.classList.toggle('active');
             });
         });
 
-        // Fitur Live Search Menggunakan JavaScript Tanpa Reload
+        // Live Search Logic + Empty State
         const searchInput = document.getElementById('searchInput');
         const searchableItems = document.querySelectorAll('.searchable-item');
+        const emptyState = document.getElementById('emptyState');
 
         searchInput.addEventListener('input', (e) => {
             const filterText = e.target.value.toLowerCase().trim();
+            let matchCount = 0;
             
             searchableItems.forEach(item => {
                 const searchKeywords = item.getAttribute('data-title').toLowerCase();
                 
                 if (filterText === '') {
                     item.style.display = 'block';
-                    // Kembalikan panel ke posisi tertutup semula
                     item.classList.remove('active');
+                    matchCount++;
                 } else if (searchKeywords.includes(filterText)) {
                     item.style.display = 'block';
-                    // Otomatis buka panel jika kategori tersebut cocok dengan pencarian
-                    if(item.classList.contains('panel')) {
-                        item.classList.add('active');
-                    }
+                    if(item.classList.contains('panel')) item.classList.add('active');
+                    matchCount++;
                 } else {
                     item.style.display = 'none';
                 }
             });
+
+            // Munculkan Empty State jika tidak ada yang cocok
+            emptyState.style.display = matchCount === 0 ? 'block' : 'none';
+        });
+
+        // Web Share API terintegrasi
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: '@AlvinF Premium Link Hub',
+                        text: 'Temukan materi kuliah, tryout, dan info magang teknik terlengkap di sini!',
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('User membatalkan share atau error:', err);
+                }
+            } else {
+                // Fallback jika browser lama
+                alert('Salin tautan ini untuk membagikan: ' + window.location.href);
+            }
         });
     </script>
 </body>
