@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Educational resources portal for college materials and majors">
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>@AlvinF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -35,7 +41,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -272,6 +278,14 @@
         .link-item a:active { background: var(--glass-hover); }
         .link-item a i { color: var(--text-muted); font-size: 0.95rem; }
 
+        /* --- Icon Color Classes --- */
+        .icon-tpb { color: var(--c-tpb); }
+        .icon-ai { color: var(--c-ai); }
+        .icon-health { color: var(--c-health); }
+        .icon-soshum { color: var(--c-soshum); }
+        .icon-saintek { color: var(--c-saintek); }
+        .icon-tes { color: var(--c-tes); }
+
         /* --- Grid System (SAINTEK) --- */
         .grid-container {
             display: grid;
@@ -328,7 +342,7 @@
         <div class="top-nav">
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="Cari materi kuliah atau jurusan...">
+                <input type="text" class="search-input" id="searchInput" placeholder="Cari materi kuliah atau jurusan..." aria-label="Search for courses or majors">
             </div>
         </div>
 
@@ -337,9 +351,9 @@
         </a>
 
         <div class="panel searchable-item" data-title="tpb itb itera">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-university" style="color: var(--c-tpb);"></i>
+                    <i class="fa-solid fa-university icon-tpb"></i>
                     <span>TPB</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -347,15 +361,15 @@
             <div class="panel-content">
                 <ul class="link-list">
                     <li class="link-item"><a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank"><i class="fa-solid fa-school"></i> TPB ITB</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> TPB ITERA</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> ITERA</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="panel searchable-item" data-title="ai artificial intelligence prompt buku">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-robot" style="color: var(--c-ai);"></i>
+                    <i class="fa-solid fa-robot icon-ai"></i>
                     <span>AI</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -363,15 +377,15 @@
             <div class="panel-content">
                 <ul class="link-list">
                     <li class="link-item"><a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank"><i class="fa-solid fa-terminal"></i> Kumpulan Prompt AI</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku Buku AI</a></li>
+                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku-Buku AI</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="panel searchable-item" data-title="kesehatan farmasi keperawatan fk fkg kedokteran gigi">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-heart-pulse" style="color: var(--c-health);"></i>
+                    <i class="fa-solid fa-heart-pulse icon-health"></i>
                     <span>KESEHATAN</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -385,9 +399,9 @@
         </div>
 
         <div class="panel searchable-item" data-title="soshum psikologi feb ekonomi bisnis fh hukum sosial komunikasi">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-scale-balanced" style="color: var(--c-soshum);"></i>
+                    <i class="fa-solid fa-scale-balanced icon-soshum"></i>
                     <span>SOSHUM</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -403,9 +417,9 @@
         </div>
 
         <div class="panel searchable-item" data-title="saintek informatika elektro data science kebumian geologi geofisika geodesi geomatika tambang perminyakan mesin perkapalan metalurgi material mipa biologi statistika astronomi oseanografi pwk sipil lingkungan industri pertanian tekkim teknik kimia kelautan">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-flask" style="color: var(--c-saintek);"></i>
+                    <i class="fa-solid fa-flask icon-saintek"></i>
                     <span>SAINTEK</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -425,21 +439,21 @@
                     <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fa-solid fa-layer-group"></i><span>Metalurgi 2</span></a>
                     <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
                     <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-water"></i><span>Oseanografi</span></a>
-                    <a href="https://drive.google.com/file/d/10Ekh41ohYpObe2DunZ5c9kIlcUVeUf_W/view?sharing" class="grid-card" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
+                    <a href="https://docs.google.com/document/d/1AobKrb24AwiJ8PqRJQ8IDFUjPxB9NBXFia94iNdo19E/edit?tab=t.0" class="grid-card" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
                     <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
                     <a href="https://drive.google.com/drive/folders/0B-m74gUnF8qxZUhid2NzNlN5dTQ?resourcekey=0-h6P72yvLSAkMF5hH0sPwNA" class="grid-card" target="_blank"><i class="fa-solid fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
-                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
-                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per Univ</span></a>
-                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
+                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkin</span></a>
+                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per. Pro</span></a>
+                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkin</span></a>
                     <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-anchor"></i><span>Teknik Kelautan</span></a>
                 </div>
             </div>
         </div>
 
         <div class="panel searchable-item" data-title="tes skd stan mandiri nasa473 osn utbk sat toefl pkm">
-            <button class="panel-trigger">
+            <button class="panel-trigger" aria-expanded="false">
                 <div class="trigger-title">
-                    <i class="fa-solid fa-pen-to-square" style="color: var(--color-tes);"></i>
+                    <i class="fa-solid fa-pen-to-square icon-tes"></i>
                     <span>TES</span>
                 </div>
                 <i class="fa-solid fa-chevron-down chevron"></i>
@@ -452,7 +466,7 @@
                     <li class="link-item"><a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank"><i class="fa-brands fa-google-drive"></i> UTBK - Google Drive</a></li>
                     <li class="link-item"><a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank"><i class="fa-solid fa-check-to-slot"></i> SKD</a></li>
                     <li class="link-item"><a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank"><i class="fa-solid fa-file-word"></i> SAT - Google Docs</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFLLLLL</a></li>
+                    <li class="link-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFL</a></li>
                     <li class="link-item"><a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank"><i class="fa-solid fa-lightbulb"></i> PKM - Google Docs</a></li>
                 </ul>
             </div>
@@ -464,47 +478,6 @@
 
     </div>
 
-    <script>
-        // Fungsionalitas Akordion Panel Menutup dan Membuka
-        document.querySelectorAll('.panel-trigger').forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const currentPanel = trigger.parentElement;
-                
-                document.querySelectorAll('.panel').forEach(panel => {
-                    if (panel !== currentPanel) {
-                        panel.classList.remove('active');
-                    }
-                });
-                
-                currentPanel.classList.toggle('active');
-            });
-        });
-
-        // Fitur Live Search Menggunakan JavaScript Tanpa Reload
-        const searchInput = document.getElementById('searchInput');
-        const searchableItems = document.querySelectorAll('.searchable-item');
-
-        searchInput.addEventListener('input', (e) => {
-            const filterText = e.target.value.toLowerCase().trim();
-            
-            searchableItems.forEach(item => {
-                const searchKeywords = item.getAttribute('data-title').toLowerCase();
-                
-                if (filterText === '') {
-                    item.style.display = 'block';
-                    // Kembalikan panel ke posisi tertutup semula
-                    item.classList.remove('active');
-                } else if (searchKeywords.includes(filterText)) {
-                    item.style.display = 'block';
-                    // Otomatis buka panel jika kategori tersebut cocok dengan pencarian
-                    if(item.classList.contains('panel')) {
-                        item.classList.add('active');
-                    }
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
