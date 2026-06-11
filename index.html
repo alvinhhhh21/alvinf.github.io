@@ -3,448 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@AlvinF • Portal Materi</title>
+    <title>AlvinF • Linktree Master Lengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --bg: #0f0f0f;
-            --glass: rgba(255,255,255,0.06);
-            --glass-border: rgba(255,255,255,0.1);
-            --text: #f1f5f9;
-            --text-muted: #94a3b8;
-        }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', system-ui, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 460px;
-            margin: 0 auto;
-            padding: 20px 16px 60px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #3b82f6, #a855f7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 20px;
-        }
-        .mode-toggle {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 9999px;
-            padding: 6px;
-            display: flex;
-            font-size: 0.75rem;
-        }
-        .mode-btn {
-            padding: 6px 14px;
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .mode-btn.active {
-            background: #3b82f6;
-            color: white;
-        }
-        .search-box {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 9999px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .search-box input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 0.95rem;
-            outline: none;
-        }
-        .featured {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            color: white;
-            padding: 16px;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-decoration: none;
-            display: block;
-        }
-        .panel {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-        .panel-header {
-            padding: 16px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .chevron { transition: transform .3s; }
-        .panel.open .chevron { transform: rotate(180deg); }
-        .panel-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height .4s ease;
-        }
-        .panel.open .panel-content {
-            max-height: 2000px;
-        }
-        .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 18px;
-            border-top: 1px solid var(--glass-border);
-        }
-        .link-item:first-child { border-top: none; }
-        .link-item a {
-            color: var(--text);
-            text-decoration: none;
-            flex: 1;
-            font-size: 0.9rem;
-        }
-        .copy-btn {
-            background: rgba(255,255,255,0.08);
-            border: none;
-            color: #94a3b8;
-            padding: 6px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.75rem;
-        }
-        .copy-btn:hover { background: rgba(255,255,255,0.15); }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            padding: 12px;
-        }
-        .grid-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 14px 10px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text);
-            text-decoration: none;
-        }
-        .footer {
-            text-align: center;
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 30px;
-        }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1f2937;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            opacity: 0;
-            transition: all 0.3s;
-            z-index: 9999;
-        }
-        .toast.show {
-            opacity: 1;
-            bottom: 30px;
-        }
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .link-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .link-card:hover { transform: translateY(-4px); }
     </style>
 </head>
-<body>
-
-<div class="container">
-
-    <!-- Header -->
-    <div class="header">
-        <div class="profile">
-            <div class="avatar">A</div>
-            <div>
-                <h2 style="margin:0; font-size:1.3rem;">@AlvinF</h2>
-                <small style="color:#64748b;">Portal Materi 2026</small>
+<body class="bg-slate-950 text-slate-200">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-2xl tracking-tight">AlvinF</h1>
+                    <p class="text-xs text-slate-400 -mt-1">Master Lengkap</p>
+                </div>
             </div>
+            <a href="https://instagram.com/alvinf.__" target="_blank"
+               class="flex items-center gap-x-2 px-8 py-2.5 bg-white text-slate-900 rounded-3xl text-sm font-bold hover:bg-amber-400 transition-colors">
+                <i class="fab fa-instagram"></i>
+                <span>@alvinf.__</span>
+            </a>
         </div>
+    </nav>
 
-        <!-- Mode Toggle -->
-        <div class="mode-toggle">
-            <div onclick="switchMode('normal')" id="btn-normal" class="mode-btn active">Normal</div>
-            <div onclick="switchMode('analytics')" id="btn-analytics" class="mode-btn">Analytics</div>
+    <!-- Hero -->
+    <div class="max-w-6xl mx-auto px-6 pt-10 pb-8 text-center">
+        <div class="w-24 h-24 mx-auto bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+            <i class="fas fa-user-graduate text-white text-5xl"></i>
         </div>
+        <h1 class="text-5xl font-bold tracking-tighter">AlvinF • Linktree</h1>
+        <p class="text-slate-400 mt-3 text-lg">Kumpulan materi kuliah terlengkap dari berbagai jurusan</p>
+        
+        <a href="https://instagram.com/alvinf.__" target="_blank"
+           class="mt-8 inline-flex items-center gap-x-3 px-10 py-4 bg-white text-slate-900 rounded-3xl font-bold text-xl shadow-2xl hover:scale-[1.02] active:scale-[0.985] transition-all">
+            <i class="fab fa-instagram text-3xl"></i>
+            <span>Follow @alvinf.__</span>
+        </a>
     </div>
 
     <!-- Search -->
-    <div class="search-box">
-        <i class="fas fa-search" style="margin-right:10px; color:#64748b;"></i>
-        <input type="text" id="searchInput" placeholder="Cari jurusan atau materi..." onkeyup="filterContent()">
-    </div>
-
-    <!-- Featured -->
-    <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="featured" target="_blank">
-        <i class="fas fa-briefcase"></i> List Tempat Magang Teknik
-    </a>
-
-    <!-- TPB -->
-    <div class="panel" data-title="tpb itb itera">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-university" style="color:#f97316"></i> <strong>TPB</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank">TPB ITB</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank">ITERA</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk')"><i class="fas fa-copy"></i></button>
-            </div>
+    <div class="max-w-3xl mx-auto px-6 pb-10">
+        <div class="relative">
+            <input type="text" id="searchInput" 
+                   class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-3xl py-4 pl-14 pr-6 text-base placeholder:text-slate-400 outline-none"
+                   placeholder="Cari jurusan atau mata kuliah...">
+            <i class="fas fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
         </div>
     </div>
 
-    <!-- AI -->
-    <div class="panel" data-title="ai prompt buku">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-robot" style="color:#a855f7"></i> <strong>AI</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank">Kumpulan Prompt AI</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC')"><i class="fas fa-copy"></i></button>
+    <!-- All Categories -->
+    <div class="max-w-6xl mx-auto px-6 pb-20 space-y-4" id="content">
+
+        <!-- TPB -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-school text-indigo-400 w-6 text-xl"></i><span class="font-semibold text-xl">TPB (Tahap Persiapan Bersama)</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
             </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank">Buku-Buku AI</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl')"><i class="fas fa-copy"></i></button>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> TPB ITB</a>
+                <a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> TPB ITERA</a>
             </div>
         </div>
+
+        <!-- AI -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-robot text-purple-400 w-6 text-xl"></i><span class="font-semibold text-xl">AI (Artificial Intelligence)</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Prompt AI</a>
+                <a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku AI</a>
+            </div>
+        </div>
+
+        <!-- Kesehatan -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-heartbeat text-red-400 w-6 text-xl"></i><span class="font-semibold text-xl">Kesehatan</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://linktr.ee/fazdraftt" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Farmasi (ITB)</a>
+                <a href="https://linktr.ee/KumpulanLinkSurvive" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Farmasi (ITB 2)</a>
+                <a href="https://linktr.ee/everythingishere_" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Farmasi (UNMUL)</a>
+                <a href="https://linktr.ee/farmasiundip" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Farmasi UNDIP 2020</a>
+                <a href="https://drive.google.com/drive/folders/1y0_kyC3B37QpiaWyr8UKhXXkEItP5Sza" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Fisioterapi (Materi)</a>
+                <a href="https://drive.google.com/drive/folders/1MtV_anDTL1wZLETf3iKFZNXEH-BHaX5W" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Keperawatan EBOOK</a>
+                <a href="https://drive.google.com/drive/folders/1lXlcV7u0j4zDRQBst0gTTmrCnFveUKUI" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> MEDICAL BOOKS</a>
+                <a href="https://drive.google.com/drive/folders/15lu_ZEisB5nMJ8Bpgo_cKzEugFTW6drE" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> MEDICAL GUIDELINE</a>
+                <a href="https://drive.google.com/drive/folders/10ssE6yzJy5VsY98XFoO6r6zX5-H8PfgK" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> MMN</a>
+                <a href="https://drive.google.com/drive/folders/1SjzQrXDsOVx_1XG64VNeeo5XEpBDn9X_XGC" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kesehatan Masyarakat</a>
+            </div>
+        </div>
+
+        <!-- Telegram Channels -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fab fa-telegram text-sky-400 w-6 text-xl"></i><span class="font-semibold text-xl">Telegram Channels (Kedokteran)</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://t.me/dentistrytextbooks" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Dentistry Textbooks</a>
+                <a href="https://t.me/internal_medicine_pdfs" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Internal Medicine PDFs</a>
+                <a href="https://t.me/StoreBooksOfMedicie" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Store Books Of Medicine</a>
+                <a href="https://t.me/Ebookfakultaskedokteran" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Ebook Fakultas Kedokteran</a>
+                <a href="https://t.me/buku_kedokteran" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Buku Kedokteran</a>
+                <a href="https://t.me/fkusumedbooks" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> FK USU Med Books</a>
+                <a href="https://t.me/ebookkedokteran" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Ebook Kedokteran</a>
+                <a href="https://t.me/sy_kedokteranfkfkg" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> SY Kedokteran FK FKG</a>
+                <a href="https://t.me/intestinumtenue" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Intestinum Tenue</a>
+                <a href="https://t.me/PinggirJurangCorp" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fab fa-telegram text-sky-400 w-5"></i> Pinggir Jurang Corp</a>
+            </div>
+        </div>
+
+        <!-- FEB + FH -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-chart-line text-emerald-400 w-6 text-xl"></i><span class="font-semibold text-xl">FEB + FH</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://linktr.ee/moitivating" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Akuntansi (STAN)</a>
+                <a href="https://drive.google.com/drive/folders/1PiYHjkBj_jf4dRSwf-s3kdZtDANYTTwi" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Akuntansi Biaya 1</a>
+                <a href="https://drive.google.com/drive/folders/1vuGH4wGT0LlfYo6HUSTg_cDgap9LydNH" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Akuntansi Manajemen UI</a>
+                <a href="https://drive.google.com/drive/folders/1W6MaYvMwRDs9_LYq4D8IUwYNdXipiZvZ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Akuntansi STAN 2014-2019 + D3</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-ilmu-ekonomi-s1/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Ilmu Ekonomi S1</a>
+                <a href="https://linktr.ee/situspentingui" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> FEB UI (Kumpulan Situs Penting)</a>
+                <a href="https://linktr.ee/maxfebui22" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Manajemen Angkatan 22 UI</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-manajemen-s2/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Manajemen S2</a>
+                <a href="https://drive.google.com/drive/folders/1m1Y0ttfeOV4SCXEvAyU_zieQiFMrVU91" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Perpajakan 1</a>
+                <a href="https://drive.google.com/drive/folders/1dlAn9fz1OfOkYWSd5qkyJlXAJ5AJh-Rs" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Materi Perpajakan</a>
+                <a href="https://drive.google.com/drive/folders/1mMW8qpx6WH6SYHW9zHKLjF6NLdjpj6Ub" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FH UI Materi</a>
+                <a href="https://drive.google.com/drive/folders/1g9iRv-Zyd8EsEkgukuIE8US6RqfEiD3M" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FH UI Perpustakaan</a>
+                <a href="https://drive.google.com/drive/folders/1tQvdYv4-6fPxTlOZ9aLI6DqleTl-gF6R" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FH UNPAD</a>
+            </div>
+        </div>
+
+        <!-- Informatika & Elektro -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-laptop-code text-blue-400 w-6 text-xl"></i><span class="font-semibold text-xl">Informatika &amp; Elektro</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/u/0/mobile/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku Informatika</a>
+                <a href="https://drive.google.com/drive/folders/1LB3LbOGdGrpKYZM7biQusLq4Gh8Tdhq7" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kumpulan Ebook Elektro Informatika</a>
+                <a href="https://drive.google.com/drive/folders/0B8pw4VeuQQy3NUYtUVN2VTAtbjQ?resourcekey=0-VXrNn2Uw7nLuLb5_ySzikQ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> STEI Teknik Elektro ITB</a>
+                <a href="https://psdahmifitb.wordpress.com/arsip-akademik-if/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> STEI Informatika ITB</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-sistem-informasi-s1/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Sistem Informasi</a>
+                <a href="https://drive.google.com/drive/folders/1TJ869bW1-qIyILy15mq1ETajgT8ztGEB?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Cybersecurity</a>
+                <a href="https://drive.google.com/drive/folders/1if09a9QyNfBRlAKey7If5preZ3BswudZ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Data Analyst</a>
+                <a href="https://linktr.ee/dataanalysis13" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Data Analyst Linktree</a>
+            </div>
+        </div>
+
+        <!-- Geodesi, Geomatika & Kebumian -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-globe text-teal-400 w-6 text-xl"></i><span class="font-semibold text-xl">Geodesi, Geomatika &amp; Kebumian</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://linktr.ee/gpmgeodesi" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Geodesi UNDIP</a>
+                <a href="https://drive.google.com/drive/folders/1VKdZ18dPhNITnFkC5bRfjQH_3ms46e0D" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Geomatika UPN</a>
+                <a href="https://drive.google.com/drive/folders/1oM24Z-C2RpAPr9FJWdEDsWZ7x9WYoqQ1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> tekling UPN</a>
+                <a href="https://jurnal.upnyk.ac.id/index.php/kebumian" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Jurnal Kebumian UPN</a>
+                <a href="https://linktr.ee/adkesmarotasi" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Geomatika ITS</a>
+                <a href="https://drive.google.com/drive/folders/12YN0H98qmXhQgOOQormQfciZ1_THABFL" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku Geomatika</a>
+                <a href="https://docs.google.com/document/d/1JH-AHzasU_uwZypS1rdsyC2o7d8lvOZU9i2knIFDS9I/edit?usp=drivesdk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Dokumen Tambahan</a>
+            </div>
+        </div>
+
+        <!-- Geologi -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-mountain text-amber-400 w-6 text-xl"></i><span class="font-semibold text-xl">Geologi</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1Vv1phbBGZFcudCVE5wwYACseq4prmEyz" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku dan Jurnal Geologi Folder 1</a>
+                <a href="https://drive.google.com/drive/folders/1xldBAIMrsUFpo0jwm-2mDVzPDceI8hIj" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku dan Jurnal Geologi Folder 2</a>
+                <a href="https://linktr.ee/geologiceria" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Geologi Ceria</a>
+                <a href="https://drive.google.com/drive/folders/1XCNZtwqLpQJNj9ubMlj3N2uI34v4O-Em" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Folder Geologi</a>
+                <a href="https://drive.google.com/drive/folders/1sL07R3aLoEpKgjZ2DDP-hcnMpjBUmy7z" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Ebook Geologi Unhas</a>
+                <a href="https://drive.google.com/drive/folders/1ee9-CHnqkidwKHUjYxC5A2LkdM64ZI3B" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Jurnal Geologi UNHAS</a>
+                <a href="https://drive.google.com/drive/folders/1bqXRhkBITB0edZCjv94hcezfh5o8lb5R" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Software Geologi</a>
+                <a href="https://drive.google.com/drive/folders/1woggDhnpo3juHDVKTPFLupsvGI9AQ7Kz" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Referensi Geologi</a>
+                <a href="https://drive.google.com/drive/folders/1CU2AyirH3aJfI-sAqcpSgvkxBTsjpZ04" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Geologi Uho</a>
+                <a href="https://www.indonesia-geospasial.com/?m=1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-globe text-blue-400 w-5"></i> SHP Geologi 1</a>
+                <a href="https://www.lapakgis.com/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-globe text-blue-400 w-5"></i> SHP Geologi 2</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-teknik-pertambangan-s1/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Pertambangan S1</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-geografi-s1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Geografi S1</a>
+                <a href="https://drive.google.com/drive/folders/1Cgxk-n7SH-kouECCJQX5cfSYHne5BHwp" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> QGIS &amp; GIS</a>
+                <a href="https://linktr.ee/pjbl2024" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> PJBL 2024</a>
+                <a href="https://linktr.ee/juwangisekali" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Random Resources</a>
+                <a href="https://drive.google.com/drive/folders/1UbSt1yQ2FDjESA2XSLIFm0IYi3WR7LCB" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Referensi Materi Tambang 1</a>
+                <a href="https://drive.google.com/drive/folders/1HKCV1hJt-JASIiwtsi4HXjVInVR-sJZg" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Referensi Materi Tambang 2</a>
+            </div>
+        </div>
+
+        <!-- Buku Perminyakan -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-oil-can text-yellow-500 w-6 text-xl"></i><span class="font-semibold text-xl">Buku Perminyakan</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/0B-5IVksPdhLWd2tZbWxVa2gzWmM?resourcekey=0-BJunaQjfBHq0LR7rjgq-Ew" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku Perminyakan</a>
+                <a href="https://repositori.kemendikdasmen.go.id/10405/1/DASAR-DASAR%20TEKNIK%20PENGEBORAN.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Dasar Dasar Teknik Pengeboran</a>
+                <a href="http://eprints.upnyk.ac.id/13501/1/Buku%20II%20Pengantar%20Teknik%20Perminyakan-Pengantar%20Teknik%20Bor.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengantar Teknik Pemboran</a>
+                <a href="http://eprints.upnyk.ac.id/13480/1/Buku%20IV%20Pengantar%20Teknik%20Perminyakan-Pengantar%20Teknik%20Produksi.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengantar Teknik Produksi</a>
+                <a href="https://repositori.kemendikdasmen.go.id/8715/1/PK%20-%20Teknik%20Produksi%20Migas%20%20-%20Teknik%20Produksi%20Migas%20XI-3.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknik Produksi Migas</a>
+                <a href="https://www.researchgate.net/publication/363033146_Teknik_Reservoir_1_Buku_Referensi_Teknik_Perminyakan" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Reservoir 1</a>
+                <a href="https://repositori.kemendikdasmen.go.id/10548/1/PK%20TEKNIK%20PRODUKSI%20MIGAS%20TENIK%20RESERVOIR%20DAN%20CADANGAN%20MIGAS%20XI%203.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknik Reservoir dan Cadangan Migas</a>
+                <a href="http://eprints.upnyk.ac.id/23938/1/TEKNOLOGI%20PERALATAN%20TEKNIK%20PEMBORAN.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknologi Peralatan Teknik Pemboran</a>
+                <a href="https://drive.google.com/file/d/0B3AhiJlGdswAZTRlYzQ1ODctNmYxMC00ZjEyLTk3ZWQtZDU2YTIwNDMwNWEx/view" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Petroleum Engineering Handbook</a>
+                <a href="https://drive.google.com/file/d/1_6W_Xgy7HRbEDJX4gcHLErGQMiJG4kqI/view" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> The Oil and Gas Engineering Guide</a>
+                <a href="https://drive.google.com/drive/folders/1v4PWCL_nqbUCgu6BNVdF6oU7-nRzq9Zh" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Perminyakan UNEJ</a>
+                <a href="https://docs.google.com/spreadsheets/d/1z7qznO_ob1GTrjY25TfcuWEEGl6CupRtoaO1lbYUSUM/edit?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-excel text-green-400 w-5"></i> Database Materi UPN</a>
+            </div>
+        </div>
+
+        <!-- Teknik Mesin & Metalurgi -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-cogs text-orange-400 w-6 text-xl"></i><span class="font-semibold text-xl">Teknik Mesin &amp; Metalurgi</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1o9_T05FNNAQZ-U3ysmbA6MOsHpCT-qmq" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> EBOOK TEKNIK MESIN</a>
+                <a href="https://drive.google.com/drive/folders/1VQSbiixTnQu7Lt9OH8X3AVIL2OM7esOb" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Mesin Buku</a>
+                <a href="https://drive.google.com/drive/folders/1fKti3hxAImH2G2GX3Q_LQ0ffkhqJGg4N" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Mesin UI</a>
+                <a href="https://drive.google.com/drive/u/0/folders/0BxISOQA_AHSeaUxzUGRNU1pyZkE?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> ITB FTMD Teknik Mesin</a>
+                <a href="https://drive.google.com/drive/folders/10rXMWh9qYC1vKXtfKEZvqR-1ek0JIdgy" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Perkapalan UI</a>
+                <a href="https://drive.google.com/drive/folders/0B1PrLMunRrrudEprOERiVV94MEU?resourcekey=0-0e4opzkCU2Ntq9Zi4adQBA" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Mesin ITS Bank Soal</a>
+                <a href="https://media.neliti.com/media/publications/313685-korosi-logam-dan-pengendaliannya-artikel-471ddb36.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Korosi Logam dan Pengendaliannya</a>
+                <a href="https://blogagki.files.wordpress.com/2016/09/e-kimia-tr_korosi-dan-pengendaliannya.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Korosi dan Proteksi</a>
+                <a href="https://repository.ukitoraja.ac.id/723/1/BUKU_AJAR_METALURGI_FISIK_Frans_R._Bethony%5B1%5D.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Buku Ajar Metalurgi Fisik (UKI Toraja)</a>
+                <a href="https://repository.harapan.ac.id/files/fulltext/846f1bc507b89c533abc4cf55a1c2259Modul_Metalurgi%20Fisik.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Modul Metalurgi Fisik (Harapan Medan)</a>
+                <a href="https://unram.sgp1.digitaloceanspaces.com/simlitabmas/kinerja/buku/jurnal/d3c1f849-9132-4f6b-94c9-f3bbf225e5d4-BUKU%20AJAR%20TERMODINAMIKA%202024%20-%20EDITING%20FIX.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Buku Ajar Termodinamika (UNRAM)</a>
+                <a href="https://www.cerdas.co.id/wp-content/uploads/2022/08/02-Ach-Muhib-Zainuri_Termodinamika-Muhib-Ach.-Zainuri-1.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Termodinamika (Ach. Muhib Zainuri)</a>
+                <a href="https://lib.atim.ac.id/uploaded_files/temporary/DigitalCollection/NDhlNGVkYTA5NGVjYjNlZDlkZmRlNTAxZmJlZWM5YzdmOTFjYWIxNw==.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengolahan Mineral dan Praktikum (ATIM)</a>
+                <a href="https://alarsymedia.com/wp-content/uploads/2024/07/Pengolahan-Mineral-II-Ekstraktif-Metalurgi.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengolahan Mineral II Ekstraktif Metalurgi</a>
+                <a href="https://perpustakaan.polman-bandung.ac.id/wp-content/uploads/2025/06/buku-draf-pa-sambas.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknik Dasar Peleburan Logam (Polman Bandung)</a>
+                <a href="http://eprints.umsida.ac.id/8386/1/Buku%20Ajar_Iswanto.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Buku Ajar Teknologi dan Metalurgi Las (UMSIDA)</a>
+                <a href="https://repositori.kemendikdasmen.go.id/10819/1/Modul%20Pembelajaran%20Center%20of%20Exellence%20%20Dasar-Dasar%20Pengelasan.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Dasar Pengelasan (Kemendikdasmen)</a>
+                <a href="https://repositori.kemendikdasmen.go.id/8456/1/Teknik%20Mesin_Teknik%20Pengelasan%20KK%20G.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknik Pengelasan</a>
+                <a href="https://www.wilhelmsen.com/globalassets/ships-service/welding/documents/wilhelmsen-ships-service---unitor-welding-handbook.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> The Welding Handbook (Wilhelmsen)</a>
+                <a href="https://www.repository.karyailmiah.trisakti.ac.id/documents/repository/buku_dody-prayitno-buku-qa-korosi.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> QA Korosi (Trisakti)</a>
+                <a href="https://docs.google.com/document/d/1OEqCAo6nSHQxEgMpFQrLr-4KYP_N_d0j6Be5mHHFxZVQ/edit?usp=drivesdk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Ref Tambahan</a>
+                <a href="https://drive.google.com/drive/folders/17HVMoOyZTdbgE7ADavZkKNb5Yyxj-juP" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Metalurgi ITS (Ebook &amp; PPT)</a>
+                <a href="https://drive.google.com/drive/folders/1usPvVTyCugb-78oG7HZ-s34G5_yxX-jw" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Metalurgi ITS Soal UTS</a>
+                <a href="https://drive.google.com/drive/folders/1bDJ0ExoViwRs_7LrKpBk7SNDoRyjxJWf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Metalurgi ITS Soal UAS</a>
+                <a href="https://drive.google.com/drive/folders/1dYw1k-7oVlL7ZwvMlxY2t-muTJpXY0xl" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Metalurgi UI</a>
+                <a href="https://drive.google.com/drive/u/0/mobile/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Metalurgi 2</a>
+                <a href="https://repository.upstegal.ac.id/6641/1/DASAR%20METALURGI(2).pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Dasar Metalurgi (UPS Tegal)</a>
+                <a href="https://www.researchgate.net/profile/Andromeda-Dwi-Laksono-2/publication/335714358_PENGENALAN_TEKNOLOGI_MATERIAL/links/5fe0abff299bf14088311e38/PENGENALAN-TEKNOLOGI-MATERIAL.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengenalan Teknologi Material</a>
+                <a href="https://eprints.akprind.ac.id/222/1/Buku%20Krismin.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Kristalografi &amp; Mineralogi (AKPRIND)</a>
+                <a href="https://mesin.ulm.ac.id/assets/dist/bahan/Material_Teknik_full.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Material Teknik (ULM)</a>
+                <a href="https://caturpramono.wordpress.com/wp-content/uploads/2020/10/catur-pramono-buku-ajar-material-teknik.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Buku Ajar Material Teknik (Catur Pramono)</a>
+            </div>
+        </div>
+
+        <!-- Kimia -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-flask text-emerald-400 w-6 text-xl"></i><span class="font-semibold text-xl">Kimia</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1mglrX71nTMzQMJBiY24SmPVSkjXONDDK" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kimia ITS</a>
+                <a href="https://drive.google.com/drive/folders/10qBEbSi5VjyMwFcIm9Urra1IGFVvB_V9" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kimia UB</a>
+            </div>
+        </div>
+
+        <!-- Matematika -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-calculator text-blue-400 w-6 text-xl"></i><span class="font-semibold text-xl">Matematika</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/14aCfjsmZz5_RNIPSQUzSkWRwX0D8T7Hk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Matematika UI</a>
+                <a href="https://drive.google.com/drive/folders/1-3_8JXV85thC_YZlUZs1gFoqzAabmbNQ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Matematika ITERA</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-matematika-s1-2/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Matematika S1 (Lecture Database)</a>
+                <a href="https://linktr.ee/Math_Archive" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Matematika UIN Bandung (Arsip)</a>
+            </div>
+        </div>
+
+        <!-- Fisika -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-atom text-sky-400 w-6 text-xl"></i><span class="font-semibold text-xl">Fisika</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1HiITZhO_VIY2GyIF3z7NxFrCY92Jsy1p" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Arsip Kuliah Fisika S1 UI</a>
+                <a href="https://drive.google.com/drive/folders/1OqD1iBLvjDEj_hFBpH9ppQLFtYKgMJ4L" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Fisika ITB</a>
+                <a href="https://linktr.ee/HimafiLibrary" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Fisika (Himafi) UNSOED</a>
+                <a href="https://drive.google.com/drive/folders/1x3WzuA1w7_vB9CHcujr6aCduhS1rNnV-?usp=drive_link" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Buku Tambahan Fisika</a>
+                <a href="https://drive.google.com/drive/folders/1fr3PXcklarJCO9FaGrqhtOM47CmZOKxT" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Fisika Buku (Kumpulan)</a>
+                <a href="https://annblphysics.blogspot.com/p/kumpulan-catatan-pelatnas-fisika.html" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Catatan Pelatnas Fisika</a>
+                <a href="https://annblphysics.blogspot.com/p/e-book-fisika.html" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Ebook Olimpiade Fisika</a>
+            </div>
+        </div>
+
+        <!-- Astronomi -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-star text-yellow-400 w-6 text-xl"></i><span class="font-semibold text-xl">Astronomi</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-astronomi-s1/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Astronomi S1 (Lecture Database)</a>
+                <a href="https://fliphtml5.com/aludp/tcfg/ILMU_DASAR_ASTRONOMI/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Ilmu Dasar Astronomi</a>
+                <a href="https://drive.google.com/drive/folders/1Lm-IXL1dNaYE6d3L2Q6CtQvprZpy3Tj0" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Textbook Astronomi</a>
+                <a href="https://umsupress.umsu.ac.id/wp-content/uploads/2024/05/9786234085006.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Sistem Koordinat Benda Langit</a>
+            </div>
+        </div>
+
+        <!-- Biologi -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-dna text-green-400 w-6 text-xl"></i><span class="font-semibold text-xl">Biologi</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1-38VKe4izsf4LGUzAF94oyxOiuq_Kks0" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Biologi UNILA</a>
+            </div>
+        </div>
+
+        <!-- Statistika -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-chart-bar text-violet-400 w-6 text-xl"></i><span class="font-semibold text-xl">Statistika</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1JCVNrPdNMay7zVMTqFMdqNwJiFF4lVnT" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Statistika - USU</a>
+                <a href="https://drive.google.com/drive/folders/1ISLLKusufqjGWowrtYfi3k-lDA77CMvn" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Statistika - UB</a>
+            </div>
+        </div>
+
+        <!-- PWK, Teknik Sipil & Teknik Lingkungan -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-hard-hat text-yellow-400 w-6 text-xl"></i><span class="font-semibold text-xl">PWK, Teknik Sipil &amp; Teknik Lingkungan</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://docs.google.com/document/d/1phHfDU901idvI9PS_8eJgTI-oCNDdOmckNbayd-Om0A/edit?tab=t.0" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> PWK</a>
+                <a href="https://drive.google.com/file/d/1VpKkGFQKvUJ700WRL7iNrzL7QYRBuxJ5/view?usp=drivesdk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Teknik Sipil (Buku Umum)</a>
+                <a href="https://drive.google.com/drive/mobile/folders/15gyQGcAoLHjvWmJJrrkKPYg3oj4dHMkD" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Sipil Materi ITS 1</a>
+                <a href="https://drive.google.com/drive/mobile/folders/1xYjB8LLZ_lRRu1gc9Nnt99iXsUpnvdxl" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Sipil Materi ITS 2</a>
+                <a href="https://drive.google.com/drive/folders/1sBK63DtnuxeTw30QenNAbk47aMnrOdyI" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Sipil ITB (FTSL)</a>
+                <a href="https://drive.google.com/drive/folders/1R3v1JxFLkvfGnKZiqFr0po5UB9sgMvaz?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FTSL Catatan PFK, Labling, RPB ITB</a>
+                <a href="https://drive.google.com/drive/folders/14reOkCN18nEbaI6y9LwKwmN8rENsOhYy?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FTSL Tutor UTS 2023 ITB</a>
+                <a href="https://drive.google.com/drive/folders/1L2GwH6AC4xorvNNzkMdGuWMdlHoFl4DG" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB (Kumpulan Text &amp; E-Book 1)</a>
+                <a href="https://drive.google.com/drive/folders/1ocm_aoCAkqSulIwssQxp_9ysAPZfehHQ?usp=drive_link" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB (Master Sejuta Umat Bagian 1)</a>
+                <a href="https://drive.google.com/drive/folders/1EzYDdtYg-0JoMqjY1xTeRALCp1fiQCcy?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB (Master Sejuta Umat Bagian 2)</a>
+                <a href="https://drive.google.com/drive/folders/1w2JWuWfgVKevtO7eN_s2dnAEhbagZ7CC" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB Materi 1</a>
+                <a href="https://drive.google.com/drive/folders/1otEL5c6qeH0EnilI5G4zZ8yf7EQeubOA" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB Materi 2</a>
+                <a href="https://drive.google.com/drive/folders/145fHvKCU1W4IDa8DkPSLKSg5TOeYvH_E" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FTSL ITB Soal</a>
+                <a href="https://drive.google.com/drive/folders/1TNWLdf-Ao0jy69rryuGMO7wy-YUYEXia?usp=drive_link" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Literatur Tekling</a>
+                <a href="https://akademikhmtl.blogspot.com/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-globe text-blue-400 w-5"></i> Website FTSL Teknik Lingkungan</a>
+                <a href="https://linktr.ee/akproimsftui" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Sipil Lingkungan UI</a>
+                <a href="https://linktr.ee/diklarhmtlundip" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Lingkungan UNDIP</a>
+                <a href="https://drive.google.com/drive/folders/1oM24Z-C2RpAPr9FJWdEDsWZ7x9WYoqQ1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan UPNVYK</a>
+                <a href="https://drive.google.com/drive/folders/1Xap4UCLV1CXgWksrj_k17HVKmFYuvf-8" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan FT Unri</a>
+                <a href="https://drive.google.com/drive/folders/11VFzRUOqjXB3RraFrP8oZz8gXYUkJYBC" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan - UNEJ</a>
+                <a href="https://drive.google.com/drive/folders/1RAb9So49Sfgr0V5VQAmExZb23cN3wohn" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Tekling - ULM</a>
+                <a href="https://drive.google.com/drive/folders/1PK0CaUYpSzRlUn90sgvugcHZz_Yd5fOc" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 1</a>
+                <a href="https://drive.google.com/drive/folders/1FagrbOJHP68MTIZ7BzHWZILzK4FTPvNr" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 2</a>
+                <a href="https://drive.google.com/drive/folders/1aLY6H83tcvd_J3370nm41PJ9PpmmHd_Z" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 3</a>
+                <a href="https://drive.google.com/drive/folders/1-Iq1G1HgA1mRDRaXMgfcp7kOXh7axfdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 4</a>
+                <a href="https://drive.google.com/drive/folders/14mvo8wp5lxq0snGzu8SyR03zRxaQSLY7" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 5</a>
+                <a href="https://drive.google.com/drive/folders/1-QcEGYoYWLEWXOhdkWH4_pExY2g-PXFS" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 6</a>
+                <a href="https://drive.google.com/drive/folders/1ZEYmdfMsvvOb1ZXvSOxadzUiQ1dOffNw" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Lingkungan Unri Semester 7</a>
+            </div>
+        </div>
+
+        <!-- Oseanografi -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-globe text-teal-400 w-6 text-xl"></i><span class="font-semibold text-xl">Oseanografi</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1sYZ70M_CpmbP1CzOq7vfibDP2gPfBw1z?usp=drive_link" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FITB OSE SEMESTER 1-6</a>
+                <a href="https://drive.google.com/drive/folders/1hPyrEfmeBRYvWI02eS88bll4XuUPH3fA" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FITB Oseanografi Materi Sem 2-4</a>
+                <a href="https://drive.google.com/drive/folders/1n8MS8HU8qw41wKHK0jZ4hIkmglhFeCuZ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> FITB Oseanografi Materi Sem 5</a>
+                <a href="https://drive.google.com/drive/folders/1q-Pmu9b9Sndeir32c_cHdijSHXKHcAGS" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Oseanografi Aplikasi</a>
+                <a href="https://drive.google.com/drive/folders/1M-RkADsrR-tTx9xDuRrNzqwEsocYeeez" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Oseanografi Buku 1</a>
+                <a href="https://drive.google.com/drive/folders/1vRcnE4rhfzsYCzLAOzO4_q1QwezbOWsZ" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Oseanografi Buku 2</a>
+                <a href="https://drive.google.com/drive/folders/1s7TGOPF3GK2twKFVVdxeoKK0Zzp24Rd6" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Oseanografi Modul Kuliah Lapangan</a>
+                <a href="https://www.researchgate.net/publication/387104111_Buku_Ajar_Dasar_Oseanografi" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Buku Ajar Dasar Oseanografi</a>
+                <a href="http://103.44.149.34/elib/assets/buku/Buku_Pengantar_Oseanografi.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Pengantar Oseanografi</a>
+                <a href="https://repository.unikama.ac.id/4103/1/B1.%20Buku%20Geografi%20Kelautan.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Geografi Kelautan</a>
+                <a href="https://eprints.unram.ac.id/21294/1/BUKU%20AJAR%20teknologi%20budidaya%20laut.pdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Buku Ajar Teknologi Budidaya Perairan Laut</a>
+            </div>
+        </div>
+
+        <!-- Teknik Kimia & Teknik Industri -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-flask text-emerald-400 w-6 text-xl"></i><span class="font-semibold text-xl">Teknik Kimia &amp; Teknik Industri</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/10WPeqj6RM9mhNi93wWHX5kk3H9LEraPp" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia - EBOOK 1</a>
+                <a href="https://drive.google.com/drive/folders/16YyZcX9BE1bSzCZW-qZ0PCogIKZ02x5_" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia - EBOOK 2</a>
+                <a href="https://drive.google.com/drive/folders/1Ln4mdJJIEA5Pi6GmKpd0u-nKlupcf-op" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia - UNWAHAS</a>
+                <a href="https://drive.google.com/drive/folders/12zEuDItPYSqBhdShHzasdBSXjiKtz5z1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia - UNPAM</a>
+                <a href="https://talenta.usu.ac.id/jtk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Jurnal Teknik Kimia USU</a>
+                <a href="https://sites.google.com/view/e-library-teknik-kimia-usu" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> E-Library Teknik Kimia USU</a>
+                <a href="https://drive.google.com/drive/folders/15XGGnUE3OMwICuoBr-7NQj6-7xz6rUJc" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> BKKMTKI</a>
+                <a href="https://librarybkkmtkid3.netlify.app/kampus/akprind" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Library BKKMTKI - AKPRIND</a>
+                <a href="https://librarybkkmtkid3.netlify.app/kampus/akamigas" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Library BKKMTKI - AKAMIGAS</a>
+                <a href="https://librarybkkmtkid3.netlify.app/kampus/ums" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Library BKKMTKI - UMS</a>
+                <a href="https://librarybkkmtkid3.netlify.app/kampus/unnes" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Library BKKMTKI - UNNES</a>
+                <a href="https://librarybkkmtkid3.netlify.app/kampus/batan" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Library BKKMTKI - POLTEK NUKLIR (BATAN)</a>
+                <a href="https://linktr.ee/akesmaonegate" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Kimia Industri ITS</a>
+                <a href="https://drive.google.com/drive/folders/1DLpP90GSHA6BnOfDYvkhQwgz2Y4CzPSH" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia UI</a>
+                <a href="https://drive.google.com/folderview?id=1zjMWoAaIfQsOA6RCf7PMLByQnI4CCawc" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Catatan Umum UNS</a>
+                <a href="https://drive.google.com/drive/folders/13o7zsK3i_a7ntXIdsIbYovJg0N52I2qI" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 1 UNS</a>
+                <a href="https://drive.google.com/drive/folders/15mOMRpjGT1GggafjU8uDndYMjsTY5ltR" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 2 UNS</a>
+                <a href="https://drive.google.com/drive/folders/1vbnB6ju6Zmq6NcKL20C1xDoO6TWSwt92" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 3 UNS</a>
+                <a href="https://drive.google.com/drive/folders/17-On2XlZ68v30C48uR0aagrSac6PmU5H" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 4 UNS</a>
+                <a href="https://drive.google.com/drive/folders/18riZ-tymsdaTci5PTL2jdolIF348MZ2_" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 5 UNS</a>
+                <a href="https://drive.google.com/drive/folders/1fIDTXFy5wCExeZn7Fkd0LUas_TWpQG9T" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 6 UNS</a>
+                <a href="https://drive.google.com/drive/folders/13fOoh4StD3T5-LmUwVzKV4l13-KGt63z" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Semester 7 UNS</a>
+                <a href="https://drive.google.com/drive/folders/1e5x6LqDM8tJQJiPyhht3YaztxzuWPeD3" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia UPN Ebook 1</a>
+                <a href="https://drive.google.com/drive/folders/1WgIqp5xET1d4df3UbST476MpTnfigcyy" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia UPN Ebook 2</a>
+                <a href="https://docs.google.com/spreadsheets/d/1OaNS02bY9PvAlVBcitUZP2JLfMq-YKk2FlSD-rdQPss/edit?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-excel text-green-400 w-5"></i> List TA Teknik Kimia UPN</a>
+                <a href="https://drive.google.com/file/d/11Ro50Kf5cuWf3GjFQ1uU4xBEojnF4CrT/view?usp=drivesdk" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> Judul Penelitian Terdahulu UPN</a>
+                <a href="https://drive.google.com/drive/folders/1-SFS5MRK7_aYvw5fZxr58ht2hdlMNB7E" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Kimia UPNVY Materi 1</a>
+                <a href="https://drive.google.com/drive/folders/199vglQ2CVfMcIrxNvt57F-qp5hTyIQSW" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> HMTK UM Purwokerto</a>
+                <a href="https://linktr.ee/p3himatekkim" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Kimia ULM</a>
+                <a href="https://linktr.ee/niyaam" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Kimia UNDIP</a>
+                <a href="https://linktr.ee/dforu25" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Kimia POLBAN</a>
+                <a href="https://drive.google.com/drive/folders/1Nt_CeOX7kHlRFfshDtF4v8Nf_PJ61rxA" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kumpulan Soal E-book 1</a>
+                <a href="https://drive.google.com/drive/folders/1ocxqxR1A1RPNW458VtmM47RervmtXR_m" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kumpulan Soal E-book 2</a>
+                <a href="https://drive.google.com/drive/folders/12_nFK1gxAuP7MY_v1z_96Tem84LE2PyF" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Kumpulan E-book 3</a>
+                <a href="https://drive.google.com/drive/folders/1ZMoTESKPvjBB3SwXmpfc92t6kWxGIUef" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Materi Kuliah 1</a>
+                <a href="https://drive.google.com/drive/folders/17miMaFalX3MysluZTFZ2amPH-nsDUS_-" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Materi Kuliah 2</a>
+                <a href="https://drive.google.com/drive/folders/1dVPz_fkdZHOpFIKAcZfZNOc8RF4Gp02j" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Laporan KP Teknik Industri</a>
+                <a href="https://drive.google.com/drive/folders/1XWockmAGFq-vJpWFBx70s1pzrGHCDFuG" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Skripsi Teknik Industri</a>
+                <a href="https://drive.google.com/drive/folders/0B5Wr3Fz8V4aSZDg5dnJxd2RzclE?resourcekey=0-_pe2rSwHbgfzGcH3i8fG2w" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknik Industri ITS</a>
+                <a href="https://industrialengineeringlibrary.my.canva.site/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Teknik Industri UPN Jatim</a>
+                <a href="https://drive.google.com/drive/folders/0B2_xDCdoR1otYUVUU3NFcDYtMkE?resourcekey=0-WV93oEW_LcdM5txcDn7vKg" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Tekdus UNPAS</a>
+                <a href="https://drive.google.com/drive/folders/1YbJBrFjbG991t0P-4t-XVf7dYr0taHdf" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Teknologi Industri Pertanian UNPAD</a>
+                <a href="https://linktr.ee/nanoteknologipangan" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Nano Teknologi Pangan</a>
+            </div>
+        </div>
+
+        <!-- Tes / Persiapan Ujian -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-edit text-rose-400 w-6 text-xl"></i><span class="font-semibold text-xl">Tes / Persiapan Ujian</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Soal Mandiri (@NASA473)</a>
+                <a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> SKD STAN</a>
+                <a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Folder UTBK - Google Drive</a>
+                <a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-file-pdf text-red-400 w-5"></i> OSN</a>
+            </div>
+        </div>
+
+        <!-- Bahasa Asing & Persiapan Tes -->
+        <div class="section">
+            <div onclick="toggleSection(this)" class="flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
+                <div class="flex items-center gap-x-4"><i class="fas fa-globe text-violet-400 w-6 text-xl"></i><span class="font-semibold text-xl">Bahasa Asing &amp; Persiapan Tes</span></div>
+                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            </div>
+            <div class="hidden mt-2 px-2 space-y-1.5">
+                <a href="https://drive.google.com/drive/folders/1z5xPfCmIob_PYB8gLZcV5yo-m3luqJ0_" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> TOEFL DLL</a>
+                <a href="https://drive.google.com/drive/folders/1z5xPfCmIob_PYB8gLZcV5yo-m3luqJ0_" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> INGGRIS (English)</a>
+                <a href="https://drive.google.com/drive/folders/1J9FjvE0yI_ZlxQ5r6b1h0vDJzvZ8iMnX" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Jepang (Japanese)</a>
+                <a href="https://drive.google.com/drive/folders/1-KwWBJnAGf9pgAv0G15tfPBIzcLUK5Wj" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> All Bahasa</a>
+                <a href="https://lecturedatabase.wordpress.com/materi-kuliah-sastra-inggris-s1/" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-link text-blue-400 w-5"></i> Sastra Inggris S1</a>
+                <a href="https://drive.google.com/drive/folders/1BTK2n_hqbS0f22TgRiBapUehnv7_W8Qt" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> SAT</a>
+                <a href="https://drive.google.com/drive/folders/16ZLKlGzV7QY7-gBJPhkiXFPu88iH3RaK" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> SAT 2</a>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Kesehatan -->
-    <div class="panel" data-title="kesehatan farmasi keperawatan fk fkg">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-heart-pulse" style="color:#14b8a6"></i> <strong>KESEHATAN</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank">Farmasi, Keperawatan, Buku Kesehatan</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank">FK, FKG</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0')"><i class="fas fa-copy"></i></button>
-            </div>
-        </div>
-    </div>
+    <footer class="text-center py-10 text-xs text-slate-500">
+        Dibuat dengan ❤️ oleh AlvinF • 2026 • instagram.com/alvinf.__
+    </footer>
 
-    <!-- Soshum -->
-    <div class="panel" data-title="soshum">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-scale-balanced" style="color:#ef4444"></i> <strong>SOSHUM</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank">Psikologi</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank">FEB</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank">FH</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank">Ilmu Sosial & Komunikasi</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-        </div>
-    </div>
+    <script>
+        function toggleSection(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('i.fa-chevron-down');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
 
-    <!-- SAINTEK (FULL) -->
-    <div class="panel" data-title="saintek tambang">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-flask" style="color:#22c55e"></i> <strong>SAINTEK</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="grid">
-                <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank"><i class="fas fa-laptop-code"></i><span>Buku Informatika</span></a>
-                <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
-                <a href="https://docs.google.com/document/d/1uqjPQOY5tybW4E1_bmrD1FihrjQP2z7Z/edit?usp=drivesdk&ouid=115297422994410850811&rtpof=true&sd=true" class="grid-card" target="_blank"><i class="fas fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
-                <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
-                <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-gem"></i><span>Geologi</span></a>
-                <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
-                
-                <!-- LINK BARU YANG KAMU KIRIM -->
-                <a href="https://docs.google.com/document/d/1N_fPXwG7jPUMFjOpflZ31gZyQBGL4o3U3fg9Kj2Ktu4/edit?usp=drivesdk" class="grid-card" target="_blank">
-                    <i class="fas fa-mountain"></i>
-                    <span>Tambang (Dokumen Baru)</span>
-                </a>
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const sections = document.querySelectorAll('.section');
 
-                <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-oil-well"></i><span>Teknik Perminyakan</span></a>
-                <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-gears"></i><span>Mesin, Perkapalan</span></a>
-                <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-atom"></i><span>Metalurgi, Material</span></a>
-                <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fas fa-layer-group"></i><span>Metalurgi 2</span></a>
-                <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
-                <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-water"></i><span>Oseanografi</span></a>
-                <a href="https://docs.google.com/document/d/1AobKrb24AwiJ8PqRJQ8IDFUjPxB9NBXFia94iNdo19E/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
-                <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
-                <a href="https://docs.google.com/document/d/1ZF-mI3zhP-f8HRGfLprIHzMGHjJjTBoLfSQFsRAotVA/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
-                <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fas fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
-                <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-building"></i><span>Tekkim Per. Pro</span></a>
-                <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fas fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
-                <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-anchor"></i><span>Teknik Kelautan</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- TES -->
-    <div class="panel" data-title="tes">
-        <div class="panel-header" onclick="togglePanel(this)">
-            <div><i class="fas fa-pen-to-square" style="color:#eab308"></i> <strong>TES</strong></div>
-            <i class="fas fa-chevron-down chevron"></i>
-        </div>
-        <div class="panel-content">
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank">SKD STAN</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank">Soal Mandiri (@NASA473)</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank">OSN</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank">UTBK - Google Drive</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank">SKD</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank">SAT</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank">TOEFL</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank">PKM</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
-            </div>
-            <div class="link-item">
-                <a href="https://drive.google.com/drive/folders/1Vk1XTrxN43sSZm2oIpbGGJbIvErN6wUk" target="_blank">File TKA</a>
-                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1Vk1XTrxN43sSZm2oIpbGGJbIvErN6wUk')"><i class="fas fa-copy"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer">
-        Made with ❤️ by <strong>@AlvinF</strong> • 2026
-    </div>
-
-</div>
-
-<!-- Toast -->
-<div id="toast" class="toast"></div>
-
-<script>
-    function togglePanel(header) {
-        const panel = header.parentElement;
-        panel.classList.toggle('open');
-    }
-
-    function copyLink(element, url) {
-        navigator.clipboard.writeText(url).then(() => {
-            const original = element.innerHTML;
-            element.innerHTML = '<i class="fas fa-check"></i>';
-            showToast("Link berhasil disalin!");
-            setTimeout(() => element.innerHTML = original, 1500);
-        });
-    }
-
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2200);
-    }
-
-    function filterContent() {
-        const term = document.getElementById('searchInput').value.toLowerCase();
-        document.querySelectorAll('.panel').forEach(panel => {
-            panel.style.display = panel.textContent.toLowerCase().includes(term) ? '' : 'none';
-        });
-    }
-
-    function switchMode(mode) {
-        const normal = document.getElementById('btn-normal');
-        const analytics = document.getElementById('btn-analytics');
-
-        if (mode === 'normal') {
-            normal.classList.add('active');
-            analytics.classList.remove('active');
-            document.querySelectorAll('.panel').forEach(p => p.style.display = '');
-            document.querySelectorAll('.count').forEach(c => c.remove());
-        } else {
-            analytics.classList.add('active');
-            normal.classList.remove('active');
-            document.querySelectorAll('.panel').forEach(panel => {
-                const count = panel.querySelectorAll('.link-item, .grid-card').length;
-                panel.style.display = '';
-                const header = panel.querySelector('.panel-header');
-                if (!header.querySelector('.count')) {
-                    const span = document.createElement('span');
-                    span.className = 'count';
-                    span.style.cssText = 'margin-left:8px; font-size:0.75rem; color:#64748b';
-                    span.textContent = `(${count} links)`;
-                    header.appendChild(span);
-                }
+            searchInput.addEventListener('input', function() {
+                const term = this.value.toLowerCase().trim();
+                sections.forEach(section => {
+                    const headerText = section.querySelector('.category-header').textContent.toLowerCase();
+                    const links = section.querySelectorAll('a');
+                    let hasMatch = headerText.includes(term);
+                    if (!hasMatch) {
+                        links.forEach(link => {
+                            if (link.textContent.toLowerCase().includes(term)) hasMatch = true;
+                        });
+                    }
+                    section.style.display = (hasMatch || term === '') ? '' : 'none';
+                });
             });
         }
-    }
-</script>
+
+        window.onload = function() {
+            setupSearch();
+            setTimeout(() => {
+                const first = document.querySelector('.section .category-header');
+                if (first) first.click();
+            }, 700);
+        }
+    </script>
 </body>
-</html>
+    </html>
