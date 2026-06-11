@@ -2,483 +2,449 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Educational resources portal for college materials and majors">
-    <meta name="theme-color" content="#050505">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>@AlvinF</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@AlvinF • Portal Materi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #050505;
-            --accent-primary: #3b82f6;
-            --accent-secondary: #8b5cf6;
-            
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.12);
-            --glass-hover: rgba(255, 255, 255, 0.08);
-            
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            
-            /* Category Colors */
-            --c-tpb: #f97316;
-            --c-kp: #3b82f6;
-            --c-ai: #a855f7;
-            --c-health: #14b8a6;
-            --c-soshum: #ef4444;
-            --c-saintek: #22c55e;
-            --c-tes: #eab308;
+            --bg: #0f0f0f;
+            --glass: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.1);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
         }
-
-        * {
-            box-sizing: border-box;
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
+        .container {
+            max-width: 460px;
+            margin: 0 auto;
+            padding: 20px 16px 60px;
+        }
+        .header {
             display: flex;
-            justify-content: center;
-            overflow-y: auto;
-            overflow-x: hidden;
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
         }
-
-        /* Ambient Background Glows */
-        .bg-blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(90px);
-            z-index: -1;
-            opacity: 0.35;
-            animation: float 12s infinite ease-in-out alternate;
-        }
-        .blob-1 { top: -10%; left: -10%; width: 320px; height: 320px; background: var(--accent-primary); }
-        .blob-2 { bottom: -10%; right: -10%; width: 280px; height: 280px; background: var(--accent-secondary); animation-delay: -6s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 50px) scale(1.1); }
-        }
-
-        .wrapper {
-            width: 100%;
-            max-width: 450px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            padding: 24px 16px 60px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* --- Profile Section --- */
         .profile {
-            text-align: center;
-            margin-bottom: 8px;
-            padding-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-
         .avatar {
-            width: 92px;
-            height: 92px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6, #a855f7);
             border-radius: 50%;
-            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
-            margin: 0 auto 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
             font-weight: 800;
-            color: #fff;
-            border: 2px solid var(--glass-border);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            font-size: 20px;
         }
-
-        .username {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-            letter-spacing: -0.02em;
-        }
-
-        .badge {
-            font-size: 0.8rem;
-            color: #fff;
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            padding: 6px 16px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(220, 39, 67, 0.25);
-            transition: transform 0.2s;
-        }
-        .badge:active { transform: scale(0.96); }
-
-        /* --- Sticky Search Bar --- */
-        .top-nav {
-            position: sticky;
-            top: 12px;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 8px;
-            border-radius: 16px;
+        .mode-toggle {
+            background: var(--glass);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            margin-bottom: 8px;
+            border-radius: 9999px;
+            padding: 6px;
+            display: flex;
+            font-size: 0.75rem;
         }
-
-        .search-container {
-            position: relative;
-            width: 100%;
+        .mode-btn {
+            padding: 6px 14px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-
-        .search-container i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .mode-btn.active {
+            background: #3b82f6;
+            color: white;
         }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 16px 12px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid transparent;
-            border-radius: 12px;
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 500;
-            outline: none;
-            transition: all 0.3s;
-        }
-        .search-input:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
-        }
-
-        /* --- Featured Button --- */
-        .btn-featured {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            color: #fff;
-            padding: 16px;
-            border-radius: 14px;
-            text-align: center;
-            font-weight: 700;
-            text-decoration: none;
+        .search-box {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 9999px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-            animation: pulse 2.5s infinite alternate;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: transform 0.2s;
+            margin-bottom: 20px;
         }
-        .btn-featured:active { transform: scale(0.98); }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
-            100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-        }
-
-        /* --- Collapsible Panels --- */
-        .panel {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .panel-trigger {
-            width: 100%;
-            padding: 16px 20px;
+        .search-box input {
+            flex: 1;
             background: transparent;
             border: none;
-            color: var(--text-main);
+            color: var(--text);
             font-size: 0.95rem;
-            font-weight: 600;
+            outline: none;
+        }
+        .featured {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            color: white;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            display: block;
+        }
+        .panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .panel-header {
+            padding: 16px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            font-weight: 600;
         }
-
-        .trigger-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .trigger-title i { width: 20px; text-align: center; font-size: 1.05rem; }
-
-        .chevron {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        .chevron { transition: transform .3s; }
+        .panel.open .chevron { transform: rotate(180deg); }
         .panel-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(0, 0, 0, 0.2);
+            transition: max-height .4s ease;
         }
-
-        /* Active Panel State */
-        .panel.active { border-color: rgba(255, 255, 255, 0.15); }
-        .panel.active .chevron { transform: rotate(180deg); }
-        .panel.active .panel-content { max-height: 2000px; }
-
-        /* --- List Items --- */
-        .link-list {
-            list-style: none;
-            padding: 6px 12px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .panel.open .panel-content {
+            max-height: 2000px;
         }
-
-        .link-item a {
+        .link-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            color: var(--text-main);
-            text-decoration: none;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.02);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: background 0.2s;
+            justify-content: space-between;
+            padding: 12px 18px;
+            border-top: 1px solid var(--glass-border);
         }
-        .link-item a:active { background: var(--glass-hover); }
-        .link-item a i { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- Icon Color Classes --- */
-        .icon-tpb { color: var(--c-tpb); }
-        .icon-ai { color: var(--c-ai); }
-        .icon-health { color: var(--c-health); }
-        .icon-soshum { color: var(--c-soshum); }
-        .icon-saintek { color: var(--c-saintek); }
-        .icon-tes { color: var(--c-tes); }
-
-        /* --- Grid System (SAINTEK) --- */
-        .grid-container {
+        .link-item:first-child { border-top: none; }
+        .link-item a {
+            color: var(--text);
+            text-decoration: none;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: #94a3b8;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.15); }
+        .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
             padding: 12px;
         }
-
         .grid-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
             border-radius: 12px;
             padding: 14px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             text-align: center;
-            gap: 8px;
-            color: var(--text-main);
-            text-decoration: none;
             font-size: 0.8rem;
-            font-weight: 500;
-            transition: background 0.2s;
+            color: var(--text);
+            text-decoration: none;
         }
-        .grid-card:active { background: var(--glass-hover); border-color: rgba(255, 255, 255, 0.08); }
-        .grid-card i { font-size: 1.2rem; color: #60a5fa; }
-
-        /* --- Footer --- */
         .footer {
             text-align: center;
             font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 16px;
-            letter-spacing: 0.5px;
+            color: #64748b;
+            margin-top: 30px;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 9999;
+        }
+        .toast.show {
+            opacity: 1;
+            bottom: 30px;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
+<div class="container">
 
-    <div class="wrapper">
-        
+    <!-- Header -->
+    <div class="header">
         <div class="profile">
             <div class="avatar">A</div>
-            <h1 class="username">@AlvinF</h1>
-            <a href="https://instagram.com/alvinf.__" class="badge" target="_blank">
-                <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-        </div>
-
-        <div class="top-nav">
-            <div class="search-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="Cari materi kuliah atau jurusan..." aria-label="Search for courses or majors">
+            <div>
+                <h2 style="margin:0; font-size:1.3rem;">@AlvinF</h2>
+                <small style="color:#64748b;">Portal Materi 2026</small>
             </div>
         </div>
 
-        <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="btn-featured searchable-item" data-title="list tempat magang teknik kerja praktek kp" target="_blank">
-            <i class="fa-solid fa-briefcase"></i> LIST TEMPAT MAGANG TEKNIK
-        </a>
-
-        <div class="panel searchable-item" data-title="tpb itb itera">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-university icon-tpb"></i>
-                    <span>TPB</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank"><i class="fa-solid fa-school"></i> TPB ITB</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-building-columns"></i> ITERA</a></li>
-                </ul>
-            </div>
+        <!-- Mode Toggle -->
+        <div class="mode-toggle">
+            <div onclick="switchMode('normal')" id="btn-normal" class="mode-btn active">Normal</div>
+            <div onclick="switchMode('analytics')" id="btn-analytics" class="mode-btn">Analytics</div>
         </div>
-
-        <div class="panel searchable-item" data-title="ai artificial intelligence prompt buku">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-robot icon-ai"></i>
-                    <span>AI</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank"><i class="fa-solid fa-terminal"></i> Kumpulan Prompt AI</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank"><i class="fa-solid fa-book"></i> Buku-Buku AI</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel searchable-item" data-title="kesehatan farmasi keperawatan fk fkg kedokteran gigi">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-heart-pulse icon-health"></i>
-                    <span>KESEHATAN</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank"><i class="fa-solid fa-pills"></i> Farmasi, Keperawatan, Buku Kesehatan</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank"><i class="fa-solid fa-stethoscope"></i> FK, FKG</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel searchable-item" data-title="soshum psikologi feb ekonomi bisnis fh hukum sosial komunikasi">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-scale-balanced icon-soshum"></i>
-                    <span>SOSHUM</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank"><i class="fa-solid fa-brain"></i> Psikologi</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-chart-line"></i> FEB</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-gavel"></i> FH</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank"><i class="fa-solid fa-users"></i> Ilmu Sosial & Komunikasi</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="panel searchable-item" data-title="saintek informatika elektro data science kebumian geologi geofisika geodesi geomatika tambang perminyakan mesin perkapalan metalurgi material mipa biologi statistika astronomi oseanografi pwk sipil lingkungan industri pertanian tekkim teknik kimia kelautan">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-flask icon-saintek"></i>
-                    <span>SAINTEK</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <div class="grid-container">
-                    <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank"><i class="fa-solid fa-laptop-code"></i><span>Buku Informatika</span></a>
-                    <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
-                    <a href="https://docs.google.com/document/d/1uqjPQOY5tybW4E1_bmrD1FihrjQP2z7Z/edit?usp=drivesdk&ouid=115297422994410850811&rtpof=true&sd=true" class="grid-card" target="_blank"><i class="fa-solid fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
-                    <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
-                    <a href="https://docs.google.com/document/d/1VYKAk8lZJoBXzv0GqTjzglDwWVvKV50Ih4HVwF6v2fE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-satellite"></i><span>Geofisika</span></a>
-                    <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gem"></i><span>Geologi</span></a>
-                    <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
-                    <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-oil-well"></i><span>Teknik Perminyakan</span></a>
-                    <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-gears"></i><span>Mesin, Perkapalan</span></a>
-                    <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-atom"></i><span>Metalurgi, Material</span></a>
-                    <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fa-solid fa-layer-group"></i><span>Metalurgi 2</span></a>
-                    <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
-                    <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-water"></i><span>Oseanografi</span></a>
-                    <a href="https://docs.google.com/document/d/1AobKrb24AwiJ8PqRJQ8IDFUjPxB9NBXFia94iNdo19E/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
-                    <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
-                    <a href="https://docs.google.com/document/d/1ZF-mI3zhP-f8HRGfLprIHzMGHjJjTBoLfSQFsRAotVA/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
-                    <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fa-solid fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
-                    <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=sharing" class="grid-card" target="_blank"><i class="fa-solid fa-building"></i><span>Tekkim Per. Pro</span></a>
-                    <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fa-solid fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
-                    <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fa-solid fa-anchor"></i><span>Teknik Kelautan</span></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel searchable-item" data-title="tes skd stan mandiri nasa473 osn utbk sat toefl pkm tka">
-            <button class="panel-trigger" aria-expanded="false">
-                <div class="trigger-title">
-                    <i class="fa-solid fa-pen-to-square icon-tes"></i>
-                    <span>TES</span>
-                </div>
-                <i class="fa-solid fa-chevron-down chevron"></i>
-            </button>
-            <div class="panel-content">
-                <ul class="link-list">
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank"><i class="fa-solid fa-file-signature"></i> SKD STAN</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank"><i class="fa-solid fa-file-lines"></i> Soal Mandiri (@NASA473)</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank"><i class="fa-solid fa-trophy"></i> OSN</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank"><i class="fa-brands fa-google-drive"></i> UTBK - Google Drive</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank"><i class="fa-solid fa-check-to-slot"></i> SKD</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank"><i class="fa-solid fa-file-word"></i> SAT - Google Docs</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank"><i class="fa-solid fa-language"></i> TOEFL</a></li>
-                    <li class="link-item"><a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank"><i class="fa-solid fa-lightbulb"></i> PKM - Google Docs</a></li>
-                    <li class="link-item"><a href="https://drive.google.com/drive/folders/1Vk1XTrxN43sSZm2oIpbGGJbIvErN6wUk" target="_blank"><i class="fa-solid fa-folder-open"></i> File TKA</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2026 @AlvinF. Powered by GitHub Pages.</p>
-        </div>
-
     </div>
 
-    <script src="script.js"></script>
+    <!-- Search -->
+    <div class="search-box">
+        <i class="fas fa-search" style="margin-right:10px; color:#64748b;"></i>
+        <input type="text" id="searchInput" placeholder="Cari jurusan atau materi..." onkeyup="filterContent()">
+    </div>
+
+    <!-- Featured -->
+    <a href="https://drive.google.com/file/d/1ftVSoO3-7LtCiKJwDXrP7d1ySTcFhhTY/view?usp=drivesdk" class="featured" target="_blank">
+        <i class="fas fa-briefcase"></i> List Tempat Magang Teknik
+    </a>
+
+    <!-- TPB -->
+    <div class="panel" data-title="tpb itb itera">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-university" style="color:#f97316"></i> <strong>TPB</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw" target="_blank">TPB ITB</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1wxUjssUB_Dj0JW7EEUzgVZqgX9ALk9Pw')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk" target="_blank">ITERA</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1KSQddYuwerrxMez0B5zQm8lfVNQW-lBml5izaA_j4Lg/edit?usp=drivesdk')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI -->
+    <div class="panel" data-title="ai prompt buku">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-robot" style="color:#a855f7"></i> <strong>AI</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC" target="_blank">Kumpulan Prompt AI</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1F8AXf2wWmoxGcUROGNYm_RPbQ5y5JXIC')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl" target="_blank">Buku-Buku AI</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1VWUWg7OeBFnoKefSfgR737wXQ0Qkj5dl')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kesehatan -->
+    <div class="panel" data-title="kesehatan farmasi keperawatan fk fkg">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-heart-pulse" style="color:#14b8a6"></i> <strong>KESEHATAN</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk" target="_blank">Farmasi, Keperawatan, Buku Kesehatan</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1CRP2G2eosR327MWijtAjvf2BcfIVNYR842P6Z_Xsk8s/edit?usp=drivesdk')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0" target="_blank">FK, FKG</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/12Ufl9m3pBN2N5uJRHoqqqbPiKLktDR7eM0mAJvoaYfg/edit?tab=t.0')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Soshum -->
+    <div class="panel" data-title="soshum">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-scale-balanced" style="color:#ef4444"></i> <strong>SOSHUM</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing" target="_blank">Psikologi</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1G_ycUdjF9wvIgSc1Uylpj5BjHRNAjeSPuAm97hiEduI/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing" target="_blank">FEB</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1db0e5jGzafJY1gSQhlL4h92UUcNm5YO0XDnefuMAQPE/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing" target="_blank">FH</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1s6UnQSfOIkabqvaDA8qBeF0u2Oe3MbUlJ66VSXAqUDw/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing" target="_blank">Ilmu Sosial & Komunikasi</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/18GM7ZOFZxPpw0AVgM5sZ1sKG_sSA2Ig9-qZKkz6kVUw/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAINTEK (FULL) -->
+    <div class="panel" data-title="saintek tambang">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-flask" style="color:#22c55e"></i> <strong>SAINTEK</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="grid">
+                <a href="https://drive.google.com/drive/folders/1bsnoaqEqjhTKtqKeo2A9oFWWHsb2C6Ko" class="grid-card" target="_blank"><i class="fas fa-laptop-code"></i><span>Buku Informatika</span></a>
+                <a href="https://drive.google.com/file/d/1BsqHLx0W1t3y5EA55NExEqH3R07vH2y_/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-microchip"></i><span>Elektro, Info, Data Science</span></a>
+                <a href="https://docs.google.com/document/d/1uqjPQOY5tybW4E1_bmrD1FihrjQP2z7Z/edit?usp=drivesdk&ouid=115297422994410850811&rtpof=true&sd=true" class="grid-card" target="_blank"><i class="fas fa-earth-americas"></i><span>Kebumian, Geologi, Geofisika</span></a>
+                <a href="https://docs.google.com/document/d/1lZMxxSq9AyhOmIvnELKPsuSy67JjT9StS2cfpkrvOkE/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-map-location-dot"></i><span>Geodesi/Geomatika</span></a>
+                <a href="https://docs.google.com/document/d/1Ok48JTG6VqCvJt5WoPqUfreVmPi--jZNru8eR1zRqFo/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-gem"></i><span>Geologi</span></a>
+                <a href="https://docs.google.com/document/d/1qeFSC-68zOCq_zGTrC9zwT5y94oD5HaAb7z2cCayz0Q/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-mountain"></i><span>Tambang, Geografi, GIS</span></a>
+                
+                <!-- LINK BARU YANG KAMU KIRIM -->
+                <a href="https://docs.google.com/document/d/1N_fPXwG7jPUMFjOpflZ31gZyQBGL4o3U3fg9Kj2Ktu4/edit?usp=drivesdk" class="grid-card" target="_blank">
+                    <i class="fas fa-mountain"></i>
+                    <span>Tambang (Dokumen Baru)</span>
+                </a>
+
+                <a href="https://docs.google.com/document/d/1hQEQFT-w6R71vIHx27lhebCmKp2ah7LRpAtW9gtU0CA/edit?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-oil-well"></i><span>Teknik Perminyakan</span></a>
+                <a href="https://drive.google.com/file/d/15lxW2rzWQ48KML58vOsVRpbpRd7_4Xw3/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-gears"></i><span>Mesin, Perkapalan</span></a>
+                <a href="https://drive.google.com/file/d/1gbc72OBAN7LqOlZ2ICPTNRKgDUOLeG8R/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-atom"></i><span>Metalurgi, Material</span></a>
+                <a href="https://drive.google.com/drive/folders/18yY5HiOq5WCDY72bDSV4izcqAJ_ZYfiJ" class="grid-card" target="_blank"><i class="fas fa-layer-group"></i><span>Metalurgi 2</span></a>
+                <a href="https://drive.google.com/file/d/1LlYhft9suTS44q3xQ0w8hwQGss4Mn5eM/view?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-dna"></i><span>MIPA, Biologi, Stat, Astro</span></a>
+                <a href="https://drive.google.com/file/d/1YyYVhop7EvtMolSbd8-t0Fw8JUqkmASr/view?usp=sharing" class="grid-card" target="_blank"><i class="fas fa-water"></i><span>Oseanografi</span></a>
+                <a href="https://docs.google.com/document/d/1AobKrb24AwiJ8PqRJQ8IDFUjPxB9NBXFia94iNdo19E/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-city"></i><span>PWK, Sipil & Lingkungan</span></a>
+                <a href="https://docs.google.com/document/d/12iHJ_VDPDwPuob5bX_dHTL000Xv9gk0I_-DazGj9ebs/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-industry"></i><span>Teknik Industri & Pertanian</span></a>
+                <a href="https://docs.google.com/document/d/1ZF-mI3zhP-f8HRGfLprIHzMGHjJjTBoLfSQFsRAotVA/edit?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-vial"></i><span>Materi Tekkim Lengkap</span></a>
+                <a href="https://drive.google.com/drive/folders/1zHh8i90hcdXdIrbFFi4i_r125eP7Z69j" class="grid-card" target="_blank"><i class="fas fa-file-contract"></i><span>Laporan KP Tekkim</span></a>
+                <a href="https://drive.google.com/file/d/1gjj6QtFInlPnAHo1Vc6DYGYU_72zR5wN/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-building"></i><span>Tekkim Per. Pro</span></a>
+                <a href="https://drive.google.com/drive/folders/1kXuUpeznLC-uyLtMlmMJOLYUqq0ix4Dv" class="grid-card" target="_blank"><i class="fas fa-graduation-cap"></i><span>Tugas Akhir Tekkim</span></a>
+                <a href="https://drive.google.com/file/d/1ypfGsA3nRHfbFPvFB360ui5PC8_IbS03/view?usp=drivesdk" class="grid-card" target="_blank"><i class="fas fa-anchor"></i><span>Teknik Kelautan</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TES -->
+    <div class="panel" data-title="tes">
+        <div class="panel-header" onclick="togglePanel(this)">
+            <div><i class="fas fa-pen-to-square" style="color:#eab308"></i> <strong>TES</strong></div>
+            <i class="fas fa-chevron-down chevron"></i>
+        </div>
+        <div class="panel-content">
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7" target="_blank">SKD STAN</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1LbPriLadbr-wxZrIKELCa_cxwA7dXKR7')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y" target="_blank">Soal Mandiri (@NASA473)</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1qF8Q7wq3ZY5eu3sQTLNNGGk1qZG7Sy1y')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing" target="_blank">OSN</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/file/d/1rfR37hfD4iJpp2ov58hIFcdwmBHMI7ZV/view?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh" target="_blank">UTBK - Google Drive</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1pcqKAxU8TfNSM_-w1M0nIc6r7lC0kpHh')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV" target="_blank">SKD</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1DbPDoiLIkLqTWcSq3bDiiojqO2CIXmTV')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0" target="_blank">SAT</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1nlVFLLWEhPVdovOVNTEKU_6j9yrMwgT_RHtTNamzYg0/edit?tab=t.0')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing" target="_blank">TOEFL</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/1hk7Vdvx0ChsMf8jTy8F5U_Lsc-mxxXYEd0Bm7TYXQYE/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing" target="_blank">PKM</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://docs.google.com/document/d/18veuwFN6us89M0b62ipyVJBj_sRFLi_w9JtyFdu1rsk/edit?usp=sharing')"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="link-item">
+                <a href="https://drive.google.com/drive/folders/1Vk1XTrxN43sSZm2oIpbGGJbIvErN6wUk" target="_blank">File TKA</a>
+                <button class="copy-btn" onclick="copyLink(this, 'https://drive.google.com/drive/folders/1Vk1XTrxN43sSZm2oIpbGGJbIvErN6wUk')"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Made with ❤️ by <strong>@AlvinF</strong> • 2026
+    </div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+    function togglePanel(header) {
+        const panel = header.parentElement;
+        panel.classList.toggle('open');
+    }
+
+    function copyLink(element, url) {
+        navigator.clipboard.writeText(url).then(() => {
+            const original = element.innerHTML;
+            element.innerHTML = '<i class="fas fa-check"></i>';
+            showToast("Link berhasil disalin!");
+            setTimeout(() => element.innerHTML = original, 1500);
+        });
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function filterContent() {
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        document.querySelectorAll('.panel').forEach(panel => {
+            panel.style.display = panel.textContent.toLowerCase().includes(term) ? '' : 'none';
+        });
+    }
+
+    function switchMode(mode) {
+        const normal = document.getElementById('btn-normal');
+        const analytics = document.getElementById('btn-analytics');
+
+        if (mode === 'normal') {
+            normal.classList.add('active');
+            analytics.classList.remove('active');
+            document.querySelectorAll('.panel').forEach(p => p.style.display = '');
+            document.querySelectorAll('.count').forEach(c => c.remove());
+        } else {
+            analytics.classList.add('active');
+            normal.classList.remove('active');
+            document.querySelectorAll('.panel').forEach(panel => {
+                const count = panel.querySelectorAll('.link-item, .grid-card').length;
+                panel.style.display = '';
+                const header = panel.querySelector('.panel-header');
+                if (!header.querySelector('.count')) {
+                    const span = document.createElement('span');
+                    span.className = 'count';
+                    span.style.cssText = 'margin-left:8px; font-size:0.75rem; color:#64748b';
+                    span.textContent = `(${count} links)`;
+                    header.appendChild(span);
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>
