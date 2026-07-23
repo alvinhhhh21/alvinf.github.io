@@ -6,75 +6,101 @@
     <title>AlvinF • Linktree Master Lengkap</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .link-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .link-card:hover { transform: translateY(-4px); }
+        body { font-family: 'Space Grotesk', sans-serif; }
+        
+        /* Utility classes untuk Neobrutalism */
+        .neo-shadow {
+            box-shadow: 6px 6px 0px 0px #000000;
+        }
+        .neo-shadow-sm {
+            box-shadow: 4px 4px 0px 0px #000000;
+        }
+        .neo-hover:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px #000000;
+        }
+        .neo-hover-sm:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200">
+<body class="bg-[#FFE5B4] text-black min-h-screen selection:bg-pink-400 selection:text-black">
     <!-- Navbar -->
-    <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
+    <nav class="sticky top-0 z-50 bg-white border-b-4 border-black">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-10 h-10 bg-indigo-600 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-white text-2xl"></i>
+            <div class="flex items-center gap-x-4">
+                <div class="w-12 h-12 bg-blue-400 border-4 border-black neo-shadow-sm rounded-xl flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-black text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-2xl tracking-tight">AlvinF</h1>
-                    <p class="text-xs text-slate-400 -mt-1">Master Lengkap</p>
+                    <h1 class="font-black text-2xl tracking-tight uppercase">AlvinF</h1>
+                    <p class="text-sm font-bold bg-yellow-300 inline-block px-1 border-2 border-black -mt-1">Master Lengkap</p>
                 </div>
             </div>
             <a href="https://instagram.com/alvinf.__" target="_blank"
-               class="flex items-center gap-x-2 px-8 py-2.5 bg-white text-slate-900 rounded-3xl text-sm font-bold hover:bg-amber-400 transition-colors">
-                <i class="fab fa-instagram"></i>
+               class="hidden sm:flex items-center gap-x-2 px-6 py-2.5 bg-pink-400 text-black border-4 border-black rounded-xl neo-shadow-sm neo-hover font-bold transition-all">
+                <i class="fab fa-instagram text-xl"></i>
                 <span>@alvinf.__</span>
             </a>
         </div>
     </nav>
 
     <!-- Hero -->
-    <div class="max-w-6xl mx-auto px-6 pt-10 pb-8 text-center">
-        <div class="w-24 h-24 mx-auto bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
-            <i class="fas fa-user-graduate text-white text-5xl"></i>
+    <div class="max-w-6xl mx-auto px-6 pt-12 pb-10 text-center">
+        <div class="w-28 h-28 mx-auto bg-emerald-400 border-4 border-black neo-shadow rounded-2xl flex items-center justify-center mb-8">
+            <i class="fas fa-user-graduate text-black text-6xl"></i>
         </div>
-        <h1 class="text-5xl font-bold tracking-tighter">AlvinF • Linktree</h1>
-        <p class="text-slate-400 mt-3 text-lg">Kumpulan materi kuliah terlengkap dari berbagai jurusan</p>
+        <h1 class="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-4">AlvinF Linktree</h1>
+        <p class="font-bold text-xl max-w-lg mx-auto bg-white border-4 border-black neo-shadow-sm p-3 rounded-xl">Kumpulan materi kuliah terlengkap dari berbagai jurusan</p>
         
         <a href="https://instagram.com/alvinf.__" target="_blank"
-           class="mt-8 inline-flex items-center gap-x-3 px-10 py-4 bg-white text-slate-900 rounded-3xl font-bold text-xl shadow-2xl hover:scale-[1.02] active:scale-[0.985] transition-all">
+           class="mt-10 inline-flex items-center gap-x-3 px-10 py-4 bg-yellow-400 text-black border-4 border-black rounded-2xl neo-shadow neo-hover font-black text-xl transition-all">
             <i class="fab fa-instagram text-3xl"></i>
-            <span>Follow @alvinf.__</span>
+            <span>FOLLOW INSTAGRAM</span>
         </a>
     </div>
 
     <!-- Search -->
-    <div class="max-w-3xl mx-auto px-6 pb-10">
+    <div class="max-w-3xl mx-auto px-6 pb-12">
         <div class="relative">
             <input type="text" id="searchInput" 
-                   class="w-full bg-slate-900 border border-slate-700 focus:border-indigo-500 rounded-3xl py-4 pl-14 pr-6 text-base placeholder:text-slate-400 outline-none"
-                   placeholder="Cari jurusan atau mata kuliah...">
-            <i class="fas fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
+                   class="w-full bg-white border-4 border-black neo-shadow rounded-2xl py-4 pl-14 pr-6 text-lg font-bold placeholder:text-gray-500 outline-none focus:translate-x-1 focus:translate-y-1 focus:shadow-[2px_2px_0px_0px_#000000] transition-all"
+                   placeholder="CARI MATERI ATAU JURUSAN...">
+            <i class="fas fa-search absolute left-5 top-5 text-2xl text-black"></i>
         </div>
     </div>
 
     <!-- All Categories -->
-    <div class="max-w-6xl mx-auto px-6 pb-20 space-y-4" id="content">
+    <div class="max-w-6xl mx-auto px-6 pb-24 space-y-6" id="content">
 
         <!-- Link Baru -->
         <div class="section">
-            <div onclick="toggleSection(this)" class="category-header flex items-center justify-between px-6 py-4 bg-slate-900 hover:bg-slate-800 rounded-3xl cursor-pointer">
-                <div class="flex items-center gap-x-4"><i class="fas fa-folder-open text-indigo-400 w-6 text-xl"></i><span class="font-semibold text-xl">Link Baru</span></div>
-                <i class="fas fa-chevron-down transition-transform text-xl"></i>
+            <div onclick="toggleSection(this)" class="category-header flex items-center justify-between px-6 py-5 bg-violet-400 border-4 border-black neo-shadow rounded-2xl cursor-pointer hover:bg-violet-500 transition-colors">
+                <div class="flex items-center gap-x-4">
+                    <div class="bg-white border-2 border-black p-2 rounded-lg">
+                        <i class="fas fa-folder-open text-black text-xl"></i>
+                    </div>
+                    <span class="font-black text-2xl uppercase">Link Baru</span>
+                </div>
+                <div class="bg-white border-2 border-black w-8 h-8 flex items-center justify-center rounded-full">
+                    <i class="fas fa-chevron-down transition-transform text-black"></i>
+                </div>
             </div>
-            <div class="hidden mt-2 px-2 space-y-1.5">
-                <a href="https://drive.google.com/drive/folders/1TYkrVcse39Gr6aL42QLOmPGovs9aWwS1" target="_blank" class="block px-6 py-3.5 bg-slate-900 hover:bg-slate-800 rounded-3xl text-sm flex items-center gap-x-3 link-card"><i class="fas fa-folder text-amber-400 w-5"></i> Folder Master Lengkap</a>
+            <div class="hidden mt-4 px-2 space-y-4">
+                <a href="https://drive.google.com/drive/folders/1TYkrVcse39Gr6aL42QLOmPGovs9aWwS1" target="_blank" 
+                   class="block px-6 py-4 bg-white border-4 border-black neo-shadow-sm neo-hover rounded-2xl text-lg font-bold flex items-center gap-x-4 transition-all">
+                    <i class="fas fa-link text-3xl text-pink-500"></i> 
+                    FOLDER MASTER LENGKAP
+                </a>
             </div>
         </div>
 
     </div>
 
-    <footer class="text-center py-10 text-xs text-slate-500">
+    <footer class="text-center py-10 font-bold border-t-4 border-black bg-white">
         Dibuat dengan ❤️ oleh AlvinF • 2026 • instagram.com/alvinf.__
     </footer>
 
